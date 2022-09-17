@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="{% static 'assets/images/favicon/favicon.png' %}"
+      type="image/x-icon"
+    />
+    <!-- ================ CSS ================ -->
+    <link rel="stylesheet" href="{% static 'assets/css/unauthorize.css' %}" />
+    <title>LAW-KOINONIA | Login</title>
+  </head>
+  <body>
+    <header class="login_header">
+      <img src="{% static 'assets/images/logo/lowyer.png' %}" alt="photo" />
+      <h1>Law Koinonia</h1>
+    </header>
+    <div class="login_body">
+      <div class="lowyer_canvas">
+        <img src="{% static 'assets/images/logo/glob.png' %}" alt="global" />
+        <h2>Be Together, <br /><span>Get In Touch</span></h2>
+      </div>
+      <div class="login_panel">
+        <form action="" method="post">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter Your Email"
+            class="user_email"
+          /><br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter Your Password"
+            class="user_password"
+          />
+          <br />
+          <button type="submit" class="login-btn">Log In</button> <br />
+          <div class="forget-password"><a href="#">Forget-Password</a></div>
+          <br />
+          <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

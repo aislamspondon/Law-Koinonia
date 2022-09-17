@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ================ FAVICON ================ -->
+    <link
+      rel="shortcut icon"
+      href="{% static 'assets/images/favicon/favicon.png' %}"
+      type="image/x-icon"
+    />
+    <!-- ===============  BOXICONS  =============== -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- ===============  Unicons  =============== -->
+
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <!-- ================ CSS ================ -->
+    <link rel="stylesheet" href="{% static './assets/css/style.css' %}" />
+    <title>LAW-KOINONIA | {% block title %}{% endblock title %}</title>
+  </head>
+  <body>
+    <!-- ================ HEADER ================ -->
+    <header class="header" id="header">
+      <nav class="nav">
+        <div class="nav_logo">
+          <a href="./index.html">
+            <img
+              src="{% static './assets/images/logo/logo.png' %}"
+              alt="logo"
+              class="nav_logo_img"
+            />
+          </a>
+          <a href="./index.html" class="nav_title">Law-koinonía</a>
+          <a href="#" class="search_bar">
+            <i class="bx bx-search-alt-2"></i>
+          </a>
+          <div class="search_bar_input">
+            <span class="back_arrow">
+              <i class="bx bx-left-arrow-alt"></i>
+            </span>
+            <input
+              type="text"
+              class="search_input"
+              placeholder="Search For Friend"
+            />
+          </div>
+          <a href="#" class="toggle-button">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </a>
+        </div>
+        <div class="nav_menu">
+          <ul class="nav_list">
+            <li class="nav_item">
+              <a href="./index.html" class="nav_link">
+                <i class="bx bx-home-alt-2"></i>
+              </a>
+            </li>
+            <li class="nav_item">
+              <a href="#store" class="nav_link">
+                <i class="bx bx-cloud"></i>
+              </a>
+            </li>
+            <li class="nav_item">
+              <a href="#case_study" class="nav_link">
+                <i class="uil uil-file-search-alt"></i>
+              </a>
+            </li>
+            <li class="nav_item">
+              <a href="#my_network" class="nav_link">
+                <i class="bx bx-group"></i>
+              </a>
+            </li>
+            <li class="nav_item">
+              <a href="#global_news" class="nav_link">
+                <i class="uil uil-globe"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="nav_profile">
+          <ul class="nav_list">
+            <li class="nav_item">
+              <a href="#message" class="nav_profile_link">
+                <i class="bx bxs-message-rounded-detail"></i>
+              </a>
+            </li>
+            <li class="nav_item">
+              <a href="#notification" class="nav_profile_link">
+                <i class="bx bxs-bell"></i>
+              </a>
+            </li>
+            <li class="nav_item">
+              <a href="#profile" class="nav_profile_details">
+                <i class="bx bxs-down-arrow"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- =================== Profile Details Box ================== -->
+    <div class="profile_box">
+      <div class="profile_box_details">
+        <a href="./profile.html" class="profile_details">
+          <div class="profile_img">
+            <img
+              src="{% static './assets//images/profile_pic/243801350_3298072810479798_5198757960072350324_n.jpg' %}"
+              alt="profile pic"
+            />
+          </div>
+          <div class="profile_name">
+            <h3>Jahidul Islam</h3>
+            <p>See your profile</p>
+          </div>
+        </a>
+        <div class="border"></div>
+        <div class="setting box_div">
+          <div class="profile_box_icon">
+            <i class="bx bx-color nav_link"></i>
+          </div>
+          <p class="setting_button">Setting & Privacy</p>
+          <div class="right_arrow">
+            <i class="bx bx-chevron-right"></i>
+          </div>
+        </div>
+        <div class="help box_div">
+          <div class="profile_box_icon">
+            <i class="bx bx-help-circle nav_link"></i>
+          </div>
+          <p class="help_button">Help & Support</p>
+          <div class="right_arrow">
+            <i class="bx bx-chevron-right"></i>
+          </div>
+        </div>
+        <div class="feeedback box_div">
+          <div class="profile_box_icon">
+            <i class="bx bxs-message-alt-error nav_link"></i>
+          </div>
+          <p class="profile_details_button">Give Feedback</p>
+        </div>
+        <div class="logout box_div">
+          <div class="profile_box_icon">
+            <i class="bx bx-log-out nav_link"></i>
+          </div>
+          <p class="profile_details_button">Log Out</p>
+        </div>
+      </div>
+      <div class="profile_box_footer">
+        <div class="profile_box_list">
+          <a href="#" class="profile_box_link">Privacy </a> *
+          <a href="#" class="profile_box_link">Terms </a> *
+
+          <a href="#" class="profile_box_link">Cookiees More </a> *
+
+          <a href="#" class="profile_box_link">Law-Comun &copy; 2022</a>
+        </div>
+      </div>
+    </div>
+    {% block body %} {% endblock body %}
+    <script src="{% static './assets/js/main.js' %}"></script>
+  </body>
+</html>
