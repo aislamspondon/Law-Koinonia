@@ -6,10 +6,14 @@ import ProfileBoxFooter from "./ProfileBoxFooter";
 export default function ProfileBox(props) {
   return (
     <>
-      <div className={`${classes.profile_box} ${props.activeProfileBox}`}>
-        <ProfileBoxDetails />
-        <ProfileBoxFooter />
-      </div>
+      {props.toggle ? (
+        <div className={`${classes.profile_box}`}>
+          <ProfileBoxDetails />
+          <ProfileBoxFooter />
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 }

@@ -1,5 +1,5 @@
 .nav_profile.deactive {
-  display: none;
+  display: inline;
 }
 .nav_list {
   display: flex;
@@ -29,7 +29,7 @@
   border-radius: 5rem;
 }
 
-.nav_profile_details.active {
+.nav_profile_details_active {
   color: cornflowerblue;
 }
 

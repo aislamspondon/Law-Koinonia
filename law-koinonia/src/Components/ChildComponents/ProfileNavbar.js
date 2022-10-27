@@ -8,8 +8,6 @@ export default function ProfileNavbar(props) {
   function toggleClick() {
     setToggle((toggle) => !toggle);
   }
-  let activeProfileIcon = toggle ? "ProfileNavbar_active__3oLbe" : "";
-  let activeProfileBox = toggle ? "ProfileBox_active__oov9z" : "";
   return (
     <>
       <div className={`${classes.nav_profile} ${props.toggleProfileMenu}`}>
@@ -25,16 +23,23 @@ export default function ProfileNavbar(props) {
             </a>
           </li>
           <li className={classes.nav_item} onClick={toggleClick}>
-            <a
-              href="#profile"
-              className={`${classes.nav_profile_details} ${activeProfileIcon}`}
-            >
-              <i class="bx bxs-down-arrow"></i>
-            </a>
+            {console.log(toggle)}
+            {toggle ? (
+              <a href="#profile" className={`${classes.nav_profile_details}`}>
+                <i
+                  class="bx bxs-down-arrow"
+                  style={{ color: "cornflowerblue" }}
+                ></i>
+              </a>
+            ) : (
+              <a href="#profile" className={`${classes.nav_profile_details}`}>
+                <i class="bx bxs-down-arrow"></i>
+              </a>
+            )}
           </li>
         </ul>
       </div>
-      <ProfileBox activeProfileBox={activeProfileBox} />
+      <ProfileBox toggle={toggle} />
     </>
   );
 }
