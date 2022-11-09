@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8#_5lfbd9it*noj1ed_=(^(6f4@ta@sfgw(nenq$=osqk9a$)$'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -37,10 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account',
-    'caseStudy',
-    'publicpost',
-    'store,'
+    
+    # Install Apps
+    'authentication.apps.AuthenticationConfig',
+    'account.apps.AccountConfig',
+    'group.apps.GroupConfig',
+    'publicpost.apps.PublicpostConfig',
+    'store.apps.StoreConfig',
+    'lawyer_socity_news.apps.LawyerSocityNewsConfig',
+
+    # Third Party Apps
+    'rest_framework',
+    "phonenumber_field",
 ]
 
 MIDDLEWARE = [
@@ -58,7 +68,7 @@ ROOT_URLCONF = 'law_koinonia.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,6 +82,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'law_koinonia.wsgi.application'
+AUTH_USER_MODEL = 'authentication.User'
 
 
 # Database
@@ -119,15 +130,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
-STATIC_ROOT = BASE_DIR / 'static'
-MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_URL = '/static/'
+MEDIA_URL = '/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static_root",
-    BASE_DIR / "media_root",
+    BASE_DIR / 'static',
+    # BASE_DIR / 'frontend/build/static'
 ]
-
+MEDIA_ROOT = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

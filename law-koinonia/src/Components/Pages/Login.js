@@ -5,6 +5,8 @@ import classes from "../../Styles/Login.module.css";
 function Login() {
   const click = () => {};
   const [login, setLogin] = useState(true);
+  const [lawyerStudent, setLawyerStudent] = useState(true);
+  const [practiseCourt, setPractiseCourt] = useState(false);
   return (
     <div className={classes.profile_body}>
       <header className={classes.login_header}>
@@ -70,14 +72,15 @@ function Login() {
             <form>
               <input
                 type="text"
-                placeholder="Enter Your Full Name"
+                placeholder="Enter First Name"
                 className={classes.login_input}
               />
               <input
                 type="text"
-                placeholder="Enter Your Practise Court "
+                placeholder="Enter Last Name"
                 className={classes.login_input}
               />
+
               <input
                 type="email"
                 placeholder="Enter Your Email"
@@ -109,7 +112,14 @@ function Login() {
                   Are You Lawyer Student
                 </p>
                 <label className={classes.radio}>
-                  <input type="radio" name="answer" />
+                  <input
+                    type="radio"
+                    name="student_answer"
+                    value="yes"
+                    onChange={(e) => {
+                      setLawyerStudent(true);
+                    }}
+                  />
                   <p
                     style={{
                       fontSize: "20px",
@@ -121,7 +131,14 @@ function Login() {
                   </p>
                 </label>
                 <label className={classes.radio}>
-                  <input type="radio" name="answer" />
+                  <input
+                    type="radio"
+                    name="student_answer"
+                    value="no"
+                    onChange={(e) => {
+                      setLawyerStudent(false);
+                    }}
+                  />
                   <p
                     style={{
                       fontSize: "20px",
@@ -133,58 +150,91 @@ function Login() {
                   </p>
                 </label>
               </div>
-              <div className={classes.control}>
-                <p
-                  style={{
-                    fontSize: "20px",
-                    color: "black",
-                    margin: "5px 30px",
-                  }}
-                >
-                  Are You Practise In Court
-                </p>
-                <label className={classes.radio}>
-                  <input type="radio" name="answer" />
+
+              {lawyerStudent ? (
+                ""
+              ) : (
+                <div className={classes.control}>
                   <p
                     style={{
                       fontSize: "20px",
                       color: "black",
-                      margin: "0 30px",
+                      margin: "5px 30px",
                     }}
                   >
-                    Yes
+                    Are You Practise In Court
                   </p>
-                </label>
-                <label className={classes.radio}>
-                  <input type="radio" name="answer" />
-                  <p
-                    style={{
-                      fontSize: "20px",
-                      color: "black",
-                      margin: "0 30px",
-                    }}
-                  >
-                    No
-                  </p>
-                </label>
-              </div>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <p
-                  style={{ fontSize: "20px", color: "black", margin: "0 20px" }}
-                >
-                  Enter Your Bar ID:{" "}
-                </p>
+                  <label className={classes.radio}>
+                    <input
+                      type="radio"
+                      name="practise_lawyer_answer"
+                      value="yes"
+                      onChange={(e) => {
+                        setPractiseCourt(true);
+                      }}
+                    />
+                    <p
+                      style={{
+                        fontSize: "20px",
+                        color: "black",
+                        margin: "0 30px",
+                      }}
+                    >
+                      Yes
+                    </p>
+                  </label>
+                  <label className={classes.radio}>
+                    <input
+                      type="radio"
+                      name="practise_lawyer_answer"
+                      value="no"
+                      onChange={(e) => {
+                        setPractiseCourt(false);
+                      }}
+                    />
+                    <p
+                      style={{
+                        fontSize: "20px",
+                        color: "black",
+                        margin: "0 30px",
+                      }}
+                    >
+                      No
+                    </p>
+                  </label>
+                </div>
+              )}
+              {lawyerStudent ? (
+                ""
+              ) : practiseCourt ? (
                 <input
                   type="text"
-                  name="barid"
-                  style={{
-                    width: "240px",
-                    height: "40px",
-                    margin: "0 20px",
-                    borderRadius: "15px",
-                  }}
+                  placeholder="Enter Your Practise Court Name"
+                  className={classes.login_input}
                 />
-              </div>
+              ) : (
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <p
+                    style={{
+                      fontSize: "20px",
+                      color: "black",
+                      margin: "0 20px",
+                    }}
+                  >
+                    Enter Your Bar ID:{" "}
+                  </p>
+                  <input
+                    type="text"
+                    name="barid"
+                    style={{
+                      width: "240px",
+                      height: "40px",
+                      margin: "0 20px",
+                      borderRadius: "15px",
+                    }}
+                  />
+                </div>
+              )}
               <div style={{ display: "flex", alignItems: "center" }}>
                 <button type="submit" className={classes.sign_up_submit}>
                   Sign Up
