@@ -9,7 +9,7 @@ function Logo() {
         <img src={logo} alt="logo" className={classes.nav_logo_img} />
       </a>
       <a href="/home" className={classes.nav_title}>
-        Law-koinonía
+        LA-Law
       </a>
     </div>
   );

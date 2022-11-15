@@ -40,17 +40,20 @@ class CustomUserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    first_name=models.CharField(_('First Name'), max_length=50)
+    last_name=models.CharField(_('Last Name'), max_length=50)
     username=models.CharField(_('Username'), max_length=40,unique=True)
     email=models.CharField(_('Email'), max_length=80,unique=True)
     phone_number=PhoneNumberField(unique=True,null=False,blank=False)
-    current_status=models.CharField(_('Current_Status'), max_length=40)
+    practice_court = models.CharField(_('Practice Court'), max_length=3)
+    current_status=models.CharField(_('Current Status'), max_length=40)
     date_joined=models.DateTimeField(_('Date'),auto_now_add=True)
 
 
-    REQUIRED_FIELDS=['username','phone_number','first_name', 'last_name']
-    USERNAME_FIELD='email'
+    REQUIRED_FIELDS=['email','phone_number','first_name', 'last_name']
+    USERNAME_FIELD='username'
 
     objects = CustomUserManager()
 
     def __str__(self):
-        return f"User {self.username}"
+        return f"User is -> {self.username}"

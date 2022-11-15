@@ -17,15 +17,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework_simplejwt.views import (TokenObtainPairView,
+                                            TokenRefreshView)
 
 urlpatterns = [
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
-    path('auth/', include('authentication.urls')),
-    path('account/', include('account.urls')),
-    path('group/', include('group.urls')),
-    path('publicpost/', include('publicpost.urls')),
-    path('store/', include('store.urls')),
-    path('news/', include('lawyer_socity_news.urls')),
+    path('api/auth/', include('authentication.urls')),
+    path('api/account/', include('account.urls')),
+    path('api/group/', include('group.urls')),
+    path('api/publicpost/', include('publicpost.urls')),
+    path('api/store/', include('store.urls')),
+    path('api/news/', include('lawyer_socity_news.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
