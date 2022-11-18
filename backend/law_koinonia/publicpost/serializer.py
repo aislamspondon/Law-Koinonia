@@ -4,21 +4,15 @@ from publicpost.models import Post, PostOpinion
 from rest_framework import serializers
 
 MAX_POST_LENGTH = settings.MAX_POST_LENGTH
-POST_ACTION_OPTIONS = settings.POST_ACTION_OPTIONS
-class PostActionSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    action = serializers.CharField()
-
-    def validate_action(self, value):
-        value = value.lower().strip()
-        if not value in POST_ACTION_OPTIONS:
-            raise serializers.ValidationError("This is not valid Action")
-        return value
-    
 class PostOpinionSerializer(serializers.ModelSerializer):
+    
+    opioner = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = PostOpinion
-        fields = ['comment']
+        fields = ['user','opioner', 'comment']
+
+    def get_opioner(self, obj):
+        return obj.user.username
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,10 +24,11 @@ class PostSerializer(serializers.ModelSerializer):
     likes = serializers.SerializerMethodField(read_only=True)
     opinion_count = serializers.SerializerMethodField(read_only=True)
     author = serializers.SerializerMethodField(read_only=True)
+    author_id = serializers.SerializerMethodField(read_only=True)
     opinion = PostOpinionSerializer(many=True, read_only=True)
     class Meta:
         model = Post
-        fields = ['id', 'author','content', 'likes', 'opinion', 'opinion_count']
+        fields = ['id', 'author','author_id','content', 'likes', 'opinion', 'opinion_count']
     
     def get_likes(self, obj):
         return obj.likes.count()
@@ -44,6 +39,8 @@ class PostSerializer(serializers.ModelSerializer):
         return author_name
     def get_opinion_count(self, obj):
         return obj.opinion.count()
+    def author_id(self, obj):
+        return obj.author.id
 
     def validate_content(self, value):
         if len(value) > MAX_POST_LENGTH:

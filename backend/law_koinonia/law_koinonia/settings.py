@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # Third Party Apps
     'rest_framework',
     "phonenumber_field",
+    "corsheaders",
 ]
 
 
@@ -106,6 +107,7 @@ SWAGGER_SETTINGS = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -134,7 +136,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'law_koinonia.wsgi.application'
 AUTH_USER_MODEL = 'authentication.User'
 MAX_POST_LENGTH = 240
-POST_ACTION_OPTIONS = ["like", "unlike", "opinion"]
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:3000",
+    "http://127.0.0.1:8000",
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

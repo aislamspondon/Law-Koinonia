@@ -7,6 +7,11 @@ from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 User = get_user_model()
 
+class FollowerRelation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     full_name = models.CharField(max_length=100, blank=True, null=True)
@@ -14,6 +19,7 @@ class Profile(models.Model):
     username=models.CharField(max_length=40,unique=True)
     email=models.CharField(max_length=80,unique=True)
     phone_number=PhoneNumberField(unique=True,null=False,blank=False)
+    followers = models.ManyToManyField(User, related_name='following', blank=True)
     description = models.TextField(blank=True)
     dob = models.DateField(blank=True, null=True)
     designation = models.CharField(max_length=50, blank=True)
@@ -22,6 +28,7 @@ class Profile(models.Model):
     website = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.full_name}'s Profile"
@@ -35,14 +42,8 @@ def create_profile(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user=instance , full_name=f"{instance.first_name} {instance.last_name}", barId=instance.current_status,court = "Court will be added Soon", username = instance.username, email = instance.email, phone_number = instance.phone_number)
 
-
-
 @receiver(post_save, sender=User)
 def save_profile(sender, instance, **kwargs):
     instance.profile.save()
 
-class Follow(models.Model):
-    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follower')
-    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
-    contact = models.ForeignKey(User, on_delete=models.CASCADE, related_name='contact')
-    created_date = models.DateTimeField(auto_now_add=True)
+
