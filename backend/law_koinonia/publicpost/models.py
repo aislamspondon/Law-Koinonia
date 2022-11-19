@@ -43,7 +43,7 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, related_name='post_user_likes', blank=True, through=PostLike)
     opinion = models.ManyToManyField(PostOpinion, related_name='post_user_opinion', blank=True)
     content = models.CharField(max_length=250, blank=True)
-    image = models.FileField(upload_to='client/images/post_images', blank=True, null=True)
+    file = models.FileField(upload_to='client/images/file',default='', blank=True, null=True)
     upload_date = models.DateTimeField(auto_now_add=True)
 
     objects = PostManager()

@@ -47,12 +47,14 @@ INSTALLED_APPS = [
     'group.apps.GroupConfig',
     'publicpost.apps.PublicpostConfig',
     'store.apps.StoreConfig',
-    'lawyer_socity_news.apps.LawyerSocityNewsConfig',
+    'news.apps.NewsConfig',
+    'chat.apps.ChatConfig',
 
     # Third Party Apps
     'rest_framework',
     "phonenumber_field",
     "corsheaders",
+    'drf_yasg',
 ]
 
 

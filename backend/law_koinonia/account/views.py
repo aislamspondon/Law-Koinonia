@@ -46,13 +46,16 @@ def get_allprofile(request):
     serializer = ProfileSerializer(profile, many=True)
     return Response(serializer.data)
 
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def uploadProfileImage(request):
     data = request.data
     profile_id = data['profile_id']
     profile = Profile.objects.get(id=profile_id)
     profile.profile_pic = request.FILES.get('profile_image')
     profile.save()
-    return Response('Profile was uploaded')
+    return Response('Profile pic upload')
 
 @api_view(['GET','POST'])
 @permission_classes([IsAuthenticated])

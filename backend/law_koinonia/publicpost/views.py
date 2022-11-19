@@ -1,13 +1,12 @@
 # from django.shortcuts import render
+from publicpost.models import Post, PostOpinion
+from publicpost.serializer import PostOpinionSerializer, PostSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import (IsAdminUser, IsAuthenticated,
                                         IsAuthenticatedOrReadOnly)
 from rest_framework.response import Response
-
-from publicpost.models import Post, PostOpinion
-from publicpost.serializer import PostOpinionSerializer, PostSerializer
 
 # Create your views here.
 
@@ -84,7 +83,18 @@ def post_detail_view(request, post_id, *args, **kwargs):
     obj = qs.first()
     serializer = PostSerializer(obj, many=False)
     return Response(serializer.data, status=200)
-    
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def uploadFilePost(request):
+    data = request.data
+    file_id = data['file_id']
+    post = Post.objects.get(id=file_id)
+    post.file = request.FILES.get('file')
+    post.save()
+    return Response('File is upload')
+
+
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])

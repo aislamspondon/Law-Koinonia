@@ -28,7 +28,7 @@ class PostSerializer(serializers.ModelSerializer):
     opinion = PostOpinionSerializer(many=True, read_only=True)
     class Meta:
         model = Post
-        fields = ['id', 'author','author_id','content', 'likes', 'opinion', 'opinion_count']
+        fields = ['id', 'author','author_id','content', 'file','likes', 'opinion', 'opinion_count']
     
     def get_likes(self, obj):
         return obj.likes.count()

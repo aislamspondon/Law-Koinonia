@@ -8,6 +8,7 @@ urlpatterns = [
     path('case/<str:case_id>', views.case_details_view, name="case_details_view"),
     path('case/<str:case_id>/delete', views.case_delete, name="case_details_view"),
     path('case/update/<str:case_id>', views.case_update, name="case_update"),
+    path('casefile-upload/', views.uploadCaseFile, name="case_file_upload"),
 
     path('case-category', views.case_category_view, name="view-case-category"),
     path('case-category/add', views.case_category_create, name="add-case-category"),

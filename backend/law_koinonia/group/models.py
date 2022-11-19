@@ -25,6 +25,7 @@ class Group_Member(models.Model):
 
 
 class Group_Post(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
     author = models.ForeignKey(Group_Member, on_delete=models.CASCADE)
     caption = models.CharField(max_length=250, blank=True)
     image = models.ImageField(upload_to='client/images/group_images', blank=True)

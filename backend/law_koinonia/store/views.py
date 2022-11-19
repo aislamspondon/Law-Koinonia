@@ -135,16 +135,26 @@ def case_update(request, case_id, *args, **kwargs):
         return Response({"message": "Case not exist or you are not authenticate"}, status=404)
     obj = case.first()
     serializer = CaseSerializer(obj, many=False)
-    print(obj.complainant, "This is obj")
     obj.case_number = data['case_number']
     obj.case_title = data['case_title']
+    obj.case_category = data['case_category']
     obj.case_details = data['case_details']
     obj.complainant = data['complainant']
     obj.defendant = data['defendant']
+    obj.division = data['division']
     obj.case_respondent = data['case_respondent']
     obj.save()
     return Response(serializer.data)
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def uploadCaseFile(request):
+    data = request.data
+    case_id = data['case_id']
+    case = Case.objects.get(_id=case_id)
+    case.profile_pic = request.FILES.get('case_file')
+    case.save()
+    return Response('File upload Done')
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
