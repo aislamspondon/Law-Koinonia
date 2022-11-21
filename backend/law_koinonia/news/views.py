@@ -41,8 +41,11 @@ def get_news(request, *args, **kwargs):
 @api_view(['GET'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def get_news_details(request,news_id, *args, **kwargs):
-    qs = News.objects.get(_id=news_id)
-    serializer  = NewsSerializer(qs, many=False)
+    news_qs = News.objects.filter(_id=news_id)
+    if not news_qs.exists():
+        return Response({'message': 'News Not Found'}, status=status.HTTP_404_NOT_FOUND)
+    news = news_qs.first()
+    serializer  = NewsSerializer(news, many=False)
     return Response(serializer.data)
 
 
@@ -89,7 +92,7 @@ def uploadNewsFile(request):
 def news_like_toggle_view(request, news_id, *args, **kwargs):
     qs = News.objects.filter(_id = news_id)
     if not qs.exists():
-        return Response({}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"message": "News Not Found"}, status=status.HTTP_404_NOT_FOUND)
     obj = qs.first()
     if request.user in obj.likes.all():
         obj.likes.remove(request.user)
@@ -105,7 +108,7 @@ def news_like_toggle_view(request, news_id, *args, **kwargs):
 def news_opinion_create(request, news_id, *args, **kwargs):
     qs = News.objects.filter(_id= news_id)
     if not qs.exists():
-        return Response({}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"message": "News Not Found"}, status=status.HTTP_404_NOT_FOUND)
     obj = qs.first()
     user = request.user
     data = request.data

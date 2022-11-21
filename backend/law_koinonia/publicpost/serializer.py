@@ -1,18 +1,23 @@
 from authentication.models import User
 from django.conf import settings
-from publicpost.models import Post, PostOpinion
 from rest_framework import serializers
+
+from publicpost.models import Post, PostOpinion
 
 MAX_POST_LENGTH = settings.MAX_POST_LENGTH
 class PostOpinionSerializer(serializers.ModelSerializer):
     
     opioner = serializers.SerializerMethodField(read_only=True)
+    post_id = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = PostOpinion
-        fields = ['user','opioner', 'comment']
+        fields = ['user', 'post_id', 'opioner', 'comment']
 
     def get_opioner(self, obj):
         return obj.user.username
+    def get_post_id(self, obj):
+        return obj.post.id
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

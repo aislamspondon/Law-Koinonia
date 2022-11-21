@@ -42,7 +42,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('authentication.urls')),
     path('api/account/', include('account.urls')),
-    path('api/group/', include('group.urls')),
+    path('api/group/', include('lawyer_group.urls')),
     path('api/publicpost/', include('publicpost.urls')),
     path('api/store/', include('store.urls')),
     path('api/news/', include('news.urls')),

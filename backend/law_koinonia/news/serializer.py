@@ -6,12 +6,15 @@ from rest_framework import serializers
 class NewsOpinionSerializer(serializers.ModelSerializer):
     
     opioner = serializers.SerializerMethodField(read_only=True)
+    news_id = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = NewsOpinion
-        fields = ['user','opioner', 'comment']
+        fields = ['user', 'news_id' ,'opioner', 'comment']
 
     def get_opioner(self, obj):
         return obj.user.username
+    def get_news_id(self, obj):
+        return obj.post._id
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

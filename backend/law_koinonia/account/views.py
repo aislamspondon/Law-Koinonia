@@ -20,6 +20,7 @@ def intro(request):
 @permission_classes([IsAuthenticated])
 def get_profile(request):
     user = request.user
+    # print(user.username, 'This is')
     profile = Profile.objects.filter(user=user)
     serializer = ProfileSerializer(profile, many=True)
     return Response(serializer.data)

@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     # Install Apps
     'authentication.apps.AuthenticationConfig',
     'account.apps.AccountConfig',
-    'group.apps.GroupConfig',
+    'lawyer_group.apps.LawyerGroupConfig',
     'publicpost.apps.PublicpostConfig',
     'store.apps.StoreConfig',
     'news.apps.NewsConfig',
