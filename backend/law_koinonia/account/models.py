@@ -35,7 +35,7 @@ class Profile(models.Model):
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
-    if instance.practice_court == "yes":
+    if instance.practice_court == True:
         if created:
             Profile.objects.create(user=instance , full_name=f"{instance.first_name} {instance.last_name}", court=instance.current_status, barId="Waiting For Bar Exam", username = instance.username, email = instance.email, phone_number = instance.phone_number)
     else:

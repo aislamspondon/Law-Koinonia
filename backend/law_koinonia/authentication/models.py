@@ -45,7 +45,7 @@ class User(AbstractUser):
     username=models.CharField(_('Username'), max_length=40,unique=True)
     email=models.CharField(_('Email'), max_length=80,unique=True)
     phone_number=PhoneNumberField(unique=True,null=False,blank=False)
-    practice_court = models.CharField(_('Practice Court'), max_length=3)
+    practice_court = models.BooleanField(null=True, blank=True)
     current_status=models.CharField(_('Current Status'), max_length=40)
     date_joined=models.DateTimeField(_('Date'),auto_now_add=True)
 

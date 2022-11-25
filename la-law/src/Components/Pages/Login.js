@@ -1,17 +1,77 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import global from "../../assets/images/logo/glob.png";
 import lowyer from "../../assets/images/logo/logo.png";
+import { fetchLoginAsync } from "../../features/login/loginSlice";
+import { fetchSignUpAsync } from "../../features/signUp/signUpSlice";
 import classes from "../../Styles/Login.module.css";
+import Loading from "../Loading";
 function Login() {
-  const click = () => {};
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [first_name, setFirstname] = useState("");
+  const [last_name, setLastname] = useState("");
+  const [phone_number, setPhoneNumber] = useState("");
+  const [regemail, setRegemail] = useState("");
+  const [regpassword, setRegpassword] = useState("");
+  const [confirmpassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [practice_court, setPracticeCourt] = useState(false);
+  const [current_status, setCurrentStatus] = useState("");
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+  const userLogin = useSelector((state) => state.userLogin);
+
+  const userSignUp = useSelector((state) => state.userSignUp);
+  const { userInfo, isLoading, isError } = userLogin;
+  const {
+    userInfo: signUpInfo,
+    isLoading: signUpLoading,
+    isError: signupError,
+    error,
+  } = userSignUp;
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
+  useEffect(() => {
+    if (!isEmpty(userInfo)) {
+      navigate("/home");
+    } else if (!isEmpty(signUpInfo)) {
+      navigate("/home");
+    }
+  }, [navigate, userInfo, signUpInfo]);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(fetchLoginAsync({ email, password }));
+  };
+  const signUpSubmitHandler = (e) => {
+    e.preventDefault();
+    if (regpassword !== confirmpassword) {
+      setMessage("Passwords do not match");
+    } else {
+      dispatch(
+        fetchSignUpAsync({
+          first_name,
+          last_name,
+          email: regemail,
+          phone_number,
+          password: regpassword,
+          practice_court,
+          current_status,
+        })
+      );
+    }
+  };
   const [login, setLogin] = useState(true);
   const [lawyerStudent, setLawyerStudent] = useState(true);
-  const [practiseCourt, setPractiseCourt] = useState(false);
-  return (
+  return isLoading || signUpLoading ? (
+    <Loading />
+  ) : (
     <div className={classes.profile_body}>
       <header className={classes.login_header}>
         <img src={lowyer} alt="lowyer" />
-        <h1>Law Koinonia</h1>
+        <h1>LA-LAW</h1>
       </header>
       <div className={classes.login_body}>
         <div className={classes.lowyer_canvas}>
@@ -23,14 +83,16 @@ function Login() {
         </div>
         {login ? (
           <div className={classes.login_panel}>
-            <h1 style={{ margin: "20px", color: "#921563" }}>Login Portal</h1>
-            <form action={click()} method="post">
+            <h1 style={{ margin: "20px", color: "#383B31" }}>Login Portal</h1>
+            <form action={submitHandler} method="post">
               <input
                 type="email"
-                name="email"
+                name="text"
                 id="email"
-                placeholder="Enter Your Email"
+                placeholder="Enter Your Email Or Username"
                 className={`${classes.user_email} ${classes.login_input}`}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <br />
               <input
@@ -39,16 +101,23 @@ function Login() {
                 id="password"
                 placeholder="Enter Your Password"
                 className={`${classes.user_password} ${classes.login_input}`}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <br />
+              {isError && (
+                <div
+                  style={{ fontSize: "20px", color: "red", marginLeft: "25px" }}
+                >
+                  You Are Not Authorize
+                </div>
+              )}
               <button
                 type="submit"
                 className={classes.login_btn}
-                onClick={() => {}}
+                onClick={submitHandler}
               >
-                <a href="/home" style={{ color: "white" }}>
-                  Log In
-                </a>
+                Log In
               </button>{" "}
               <br />
               <div className={classes.forget_password}>
@@ -74,32 +143,58 @@ function Login() {
                 type="text"
                 placeholder="Enter First Name"
                 className={classes.login_input}
+                value={first_name}
+                onChange={(e) => setFirstname(e.target.value)}
               />
               <input
                 type="text"
                 placeholder="Enter Last Name"
                 className={classes.login_input}
+                value={last_name}
+                onChange={(e) => setLastname(e.target.value)}
               />
 
               <input
                 type="email"
                 placeholder="Enter Your Email"
                 className={classes.login_input}
+                value={regemail}
+                onChange={(e) => setRegemail(e.target.value)}
               />
               <input
                 type="number"
                 placeholder="Enter Your Phone Number"
                 className={classes.login_input}
+                value={phone_number}
+                onChange={(e) => setPhoneNumber(e.target.value)}
               />
+              {message && (
+                <div
+                  style={{ fontSize: "20px", color: "red", marginLeft: "25px" }}
+                >
+                  {message}
+                </div>
+              )}
+              {signupError && (
+                <div
+                  style={{ fontSize: "20px", color: "red", marginLeft: "25px" }}
+                >
+                  {error}
+                </div>
+              )}
               <input
                 type="password"
                 placeholder="Enter Your Password"
                 className={classes.login_input}
+                value={regpassword}
+                onChange={(e) => setRegpassword(e.target.value)}
               />
               <input
                 type="password"
                 placeholder="Enter Your Confirm Password"
                 className={classes.login_input}
+                value={confirmpassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <div className={classes.control}>
                 <p
@@ -118,6 +213,7 @@ function Login() {
                     value="yes"
                     onChange={(e) => {
                       setLawyerStudent(true);
+                      setPracticeCourt(true);
                     }}
                   />
                   <p
@@ -170,7 +266,7 @@ function Login() {
                       name="practise_lawyer_answer"
                       value="yes"
                       onChange={(e) => {
-                        setPractiseCourt(true);
+                        setPracticeCourt(true);
                       }}
                     />
                     <p
@@ -189,7 +285,7 @@ function Login() {
                       name="practise_lawyer_answer"
                       value="no"
                       onChange={(e) => {
-                        setPractiseCourt(false);
+                        setPracticeCourt(false);
                       }}
                     />
                     <p
@@ -206,11 +302,13 @@ function Login() {
               )}
               {lawyerStudent ? (
                 ""
-              ) : practiseCourt ? (
+              ) : practice_court ? (
                 <input
                   type="text"
                   placeholder="Enter Your Practise Court Name"
                   className={classes.login_input}
+                  value={current_status}
+                  onChange={(e) => setCurrentStatus(e.target.value)}
                 />
               ) : (
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -221,7 +319,7 @@ function Login() {
                       margin: "0 20px",
                     }}
                   >
-                    Enter Your Bar ID:{" "}
+                    Enter Your Bar ID:{""}
                   </p>
                   <input
                     type="text"
@@ -232,11 +330,17 @@ function Login() {
                       margin: "0 20px",
                       borderRadius: "15px",
                     }}
+                    value={current_status}
+                    onChange={(e) => setCurrentStatus(e.target.value)}
                   />
                 </div>
               )}
               <div style={{ display: "flex", alignItems: "center" }}>
-                <button type="submit" className={classes.sign_up_submit}>
+                <button
+                  type="submit"
+                  className={classes.sign_up_submit}
+                  onClick={signUpSubmitHandler}
+                >
                   Sign Up
                 </button>
                 <button

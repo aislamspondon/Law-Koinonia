@@ -4,7 +4,7 @@ from publicpost.serializer import PostOpinionSerializer, PostSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import (IsAdminUser, IsAuthenticated,
+from rest_framework.permissions import (IsAuthenticated,
                                         IsAuthenticatedOrReadOnly)
 from rest_framework.response import Response
 
@@ -112,8 +112,9 @@ def post_edit(request, post_id, *args, **kwargs):
 
 
 @api_view(['DELETE'])
-@permission_classes([IsAuthenticated, IsAdminUser])
+@permission_classes([IsAuthenticated])
 def post_delete_view(request, post_id, *args, **kwargs):
+    print(request.user)
     qs = Post.objects.filter(id=post_id)
     if not qs.exists():
         return Response({"message": "Post doesn't exit"}, status=404)

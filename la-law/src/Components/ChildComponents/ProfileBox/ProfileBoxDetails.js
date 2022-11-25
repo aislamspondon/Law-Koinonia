@@ -1,8 +1,17 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import profilepic from "../../../assets/images/profile_pic/243801350_3298072810479798_5198757960072350324_n.jpg";
+import { logout } from "../../../features/login/loginSlice";
 import classes from "../../../Styles/ChildStyles/ProfileBoxDetails.module.css";
-
 export default function ProfileBoxDetails() {
+  const userLogin = useSelector((state) => state.userLogin);
+  const dispatch = useDispatch();
+  const { userInfo } = userLogin;
+  const logoutHandler = () => {
+    localStorage.removeItem("userInfo");
+    dispatch(logout);
+  };
+  const { first_name, last_name } = userInfo;
   return (
     <>
       <div className={classes.profile_box_details}>
@@ -11,7 +20,7 @@ export default function ProfileBoxDetails() {
             <img src={profilepic} alt="profile pic" />
           </div>
           <div className={classes.profile_name}>
-            <h3>Jahidul Islam</h3>
+            <h3>{`${first_name} ${last_name}`}</h3>
             <p>See your profile</p>
           </div>
         </a>
@@ -45,7 +54,12 @@ export default function ProfileBoxDetails() {
             <div className={classes.profile_box_icon}>
               <i class="bx bx-log-out nav_link"></i>
             </div>
-            <p className={classes.profile_details_button}>Log Out</p>
+            <p
+              className={classes.profile_details_button}
+              onClick={logoutHandler}
+            >
+              Log Out
+            </p>
           </div>
         </a>
       </div>
