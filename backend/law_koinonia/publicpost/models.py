@@ -42,7 +42,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post')
     likes = models.ManyToManyField(User, related_name='post_user_likes', blank=True, through=PostLike)
     opinion = models.ManyToManyField(PostOpinion, related_name='post_user_opinion', blank=True)
-    content = models.CharField(max_length=250, blank=True)
+    content = models.TextField(blank=True)
     file = models.FileField(upload_to='client/images/file',default='', blank=True, null=True)
     upload_date = models.DateTimeField(auto_now_add=True)
 

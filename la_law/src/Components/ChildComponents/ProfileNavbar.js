@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-
 import classes from "../../Styles/ChildStyles/ProfileNavbar.module.css";
 import ProfileBox from "./ProfileBox/ProfileBox";
+
 
 export default function ProfileNavbar(props) {
   const [toggle, setToggle] = useState(false);
@@ -23,7 +23,6 @@ export default function ProfileNavbar(props) {
             </a>
           </li>
           <li className={classes.nav_item} onClick={toggleClick}>
-            {console.log(toggle)}
             {toggle ? (
               <div className={`${classes.nav_profile_details}`}>
                 <i

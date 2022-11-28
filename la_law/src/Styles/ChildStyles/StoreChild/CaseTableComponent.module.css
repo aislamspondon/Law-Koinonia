@@ -44,6 +44,7 @@
 .single_case td {
   text-align: center;
   padding: 10px;
+  font-size: 14px;
 }
 
 @media screen and (max-width: 530px) {

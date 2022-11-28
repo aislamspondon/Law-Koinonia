@@ -1,10 +1,10 @@
 import axios from "axios";
-import { userProfile } from "../user/actions";
-import { USER_PROFILE_FAIL, USER_PROFILE_REQUEST } from "../user/actionType";
+import { caseCategoryView } from "../case/actions";
+import { CASE_CATEGORY_VIEW_FAIL, CASE_CATEGORY_VIEW_REQUEST } from "../case/actionType";
 
-const fetchUserDetails = async (dispatch, getState) => {
+const fetchCaseCategory = async (dispatch, getState) => {
   try {
-    dispatch({ type: USER_PROFILE_REQUEST });
+    dispatch({ type: CASE_CATEGORY_VIEW_REQUEST });
     const {
       userLogin: { userInfo },
     } = getState();
@@ -15,13 +15,13 @@ const fetchUserDetails = async (dispatch, getState) => {
       },
     };
     const { data } = await axios.get(
-      `http://127.0.0.1:8000/api/account/profile`,
+      `http://127.0.0.1:8000/api/store/case-category`,
       config
     );
-    dispatch(userProfile(data[0]));
+    dispatch(caseCategoryView(data));
   } catch (error) {
     dispatch({
-      type: USER_PROFILE_FAIL,
+      type: CASE_CATEGORY_VIEW_FAIL,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -29,4 +29,4 @@ const fetchUserDetails = async (dispatch, getState) => {
     });
   }
 };
-export default fetchUserDetails;
+export default fetchCaseCategory;

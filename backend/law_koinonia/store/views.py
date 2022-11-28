@@ -16,11 +16,11 @@ def intro(request):
 # Case Category ========================
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def case_category_view(request, *args, **kwargs):
     qs = Case_Category.objects.all()
     serializer = CaseCategorySerializer(qs, many=True)
-    return Response(serializer.data, status=status.HTTP_302_FOUND)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
@@ -64,7 +64,7 @@ def case_category_delete(request, category_id ,*args, **kwargs):
 def case_division_view(request, *args, **kwargs):
     qs = Case_Division.objects.all()
     serializer = CaseDivisionSerializer(qs, many=True)
-    return Response(serializer.data, status=status.HTTP_302_FOUND)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 
@@ -143,6 +143,7 @@ def case_update(request, case_id, *args, **kwargs):
     obj.defendant = data['defendant']
     obj.division = data['division']
     obj.case_respondent = data['case_respondent']
+    obj.case_docs = request.FILES.get('case_file')
     obj.save()
     return Response(serializer.data)
 

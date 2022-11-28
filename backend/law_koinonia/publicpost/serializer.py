@@ -1,8 +1,8 @@
+from account.models import Profile
 from authentication.models import User
 from django.conf import settings
-from rest_framework import serializers
-
 from publicpost.models import Post, PostOpinion
+from rest_framework import serializers
 
 MAX_POST_LENGTH = settings.MAX_POST_LENGTH
 class PostOpinionSerializer(serializers.ModelSerializer):
@@ -23,6 +23,11 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['first_name', 'last_name']
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['full_name', 'profile_pic', 'username','designation', 'court', 'barId']
         
 
 class PostSerializer(serializers.ModelSerializer):
@@ -30,10 +35,14 @@ class PostSerializer(serializers.ModelSerializer):
     opinion_count = serializers.SerializerMethodField(read_only=True)
     author = serializers.SerializerMethodField(read_only=True)
     author_id = serializers.SerializerMethodField(read_only=True)
+    profile_pic = serializers.SerializerMethodField(read_only=True)
+    designation = serializers.SerializerMethodField(read_only=True)
+    court = serializers.SerializerMethodField(read_only=True)
+    profile_pic = serializers.SerializerMethodField(read_only=True)
     opinion = PostOpinionSerializer(many=True, read_only=True)
     class Meta:
         model = Post
-        fields = ['id', 'author','author_id','content', 'file','likes', 'opinion', 'opinion_count']
+        fields = ['id', 'author','author_id', 'profile_pic', 'designation', 'court', 'content', 'file','likes', 'opinion', 'opinion_count' ]
     
     def get_likes(self, obj):
         return obj.likes.count()
@@ -42,6 +51,26 @@ class PostSerializer(serializers.ModelSerializer):
         serializer = UserSerializer(author, many=False)
         author_name = f"{serializer.data['first_name']} {serializer.data['last_name']}"
         return author_name
+
+    def get_profile_pic(self, obj):
+        author = obj.author
+        profile = Profile.objects.get(user=author)
+        serializer = ProfileSerializer(profile, many=False)
+        author_pic = serializer.data['profile_pic']
+        return author_pic
+    def get_designation(self, obj):
+        author = obj.author
+        profile = Profile.objects.get(user=author)
+        serializer = ProfileSerializer(profile, many=False)
+        designation = serializer.data['designation']
+        return designation
+    def get_court(self, obj):
+        author = obj.author
+        profile = Profile.objects.get(user=author)
+        serializer = ProfileSerializer(profile, many=False)
+        court = serializer.data['court']
+        return court
+    
     def get_opinion_count(self, obj):
         return obj.opinion.count()
     def author_id(self, obj):

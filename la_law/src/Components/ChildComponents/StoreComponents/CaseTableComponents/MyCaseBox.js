@@ -1,51 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import fetchCaseView from "../../../../redux/thunk/fetchCaseView";
 import classes from "../../../../Styles/ChildStyles/StoreChild/MyCaseBox.module.css";
 import CaseBox from "../../../CaseBox";
+import Loading from "../../../Loading";
 import AddCaseButton from "./AddCaseButton";
 import CaseSearchBar from "./CaseSearchBar";
+
 export default function MyCaseBox() {
-  let alldata = [
-    {
-      id: "1",
-      caseNumber: "Writ Petition 18627/2017",
-      caseParties: "A.H.M Mainuddin vs Govt. of Bangladesh",
-      caseDetails: "Broken Car in Chasara",
-      division: "Appellate Division",
-      result: "Fixed for hearing",
-    },
-    {
-      id: "2",
-      caseNumber: "Writ Petition 18627/2017",
-      caseParties: "A.H.M Mainuddin vs Govt. of Bangladesh",
-      caseDetails: "Broken Car in Chasara",
-      division: "Appellate Division",
-      result: "Fixed for hearing",
-    },
-    {
-      id: "3",
-      caseNumber: "Writ Petition 18627/2017",
-      caseParties: "A.H.M Mainuddin vs Govt. of Bangladesh",
-      caseDetails: "Broken Car in Chasara",
-      division: "Appellate Division",
-      result: "Fixed for hearing",
-    },
-    {
-      id: "4",
-      caseNumber: "Writ Petition 18627/2017",
-      caseParties: "A.H.M Mainuddin vs Govt. of Bangladesh",
-      caseDetails: "Broken Car in Chasara",
-      division: "Appellate Division",
-      result: "Fixed for hearing",
-    },
-    {
-      id: "5",
-      caseNumber: "Writ Petition 18627/2017",
-      caseParties: "A.H.M Mainuddin vs Govt. of Bangladesh",
-      caseDetails: "Broken Car in Chasara",
-      division: "Appellate Division",
-      result: "Fixed for hearing",
-    },
-  ];
+  const dispatch = useDispatch();
+  const caseView = useSelector((state) => state.caseView);
+  const { loading, cases } = caseView;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(fetchCaseView)
+    }
+  }, [ userInfo, dispatch]);
+  
   return (
     <div className={classes.my_case_box}>
       <div
@@ -66,7 +39,9 @@ export default function MyCaseBox() {
           width: "100%",
         }}
       >
-        <CaseBox alldata={alldata} />
+        {loading ? <Loading/> : (
+          <CaseBox cases={cases} />
+        )}
       </div>
     </div>
   );

@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import fetchPostCreate from '../../../redux/thunk/fetchPostCreate';
 import classes from "../../../Styles/ChildStyles/HomePageChildStyle/HomePostMain.module.css";
-
 export default function PostingPage(props) {
+  const dispatch = useDispatch();
+  
+  const [content, setContent] = useState("");
+
+  
   const closeBtn = (action) => {
     props.closeBtn(action);
+  };
+
+  const postSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(fetchPostCreate(content));
+    closeBtn(false)
   };
   return (
     <>
@@ -19,6 +31,7 @@ export default function PostingPage(props) {
             </button>
           </div>
 
+          <form>
           <div className={classes.posting_profile}>
             <div className={classes.posting_profile_bio}>
               <div className={classes.profile_post_image}>
@@ -41,6 +54,8 @@ export default function PostingPage(props) {
               name="posting_txt"
               id="posting_txt"
               placeholder="What do you want to talk about ?"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
             ></textarea>
           </div>
           <div className={classes.assets_line}>
@@ -53,9 +68,14 @@ export default function PostingPage(props) {
             <i className={`bx bx-poll ${classes.asset_icon_in_line}`}></i>
             <i className={`uil uil-schedule ${classes.asset_icon_in_line}`}></i>
           </div>
-          <button className={classes.post_button} id="post_button">
-            Post
-          </button>
+          <button
+                  type="submit"
+                  className={classes.post_button} id="post_button"
+                  onClick={postSubmitHandler}
+                >
+                  Post
+                </button>
+          </form>
         </div>
       </div>
     </>

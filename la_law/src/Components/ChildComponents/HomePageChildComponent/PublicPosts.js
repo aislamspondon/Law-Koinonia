@@ -1,27 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import fetchNewsFeed from "../../../redux/thunk/fetchNewsFeed";
+import classes from "../../../Styles/ChildStyles/HomePageChildStyle/HomePostMain.module.css";
 import PublicPost from "./PublicPost";
 
-import classes from "../../../Styles/ChildStyles/HomePageChildStyle/HomePostMain.module.css";
-
 export default function PublicPosts() {
-  let alldata = [
-    {
-      name: "Jahidul Islam",
-      desig: "Student",
-      company: "RPSU",
-      post: "Today is one of the best day of my life and i enjoy this day very well. Thanks Everyone to arrange everything for my.",
-    },
-    {
-      name: "Asraful Islam",
-      desig: "Student",
-      company: "DIU",
-      post: "i enjoy this day very well. Thanks Everyone to arrange everything for my.",
-    },
-  ];
+  const dispatch = useDispatch();
+  const postnewsFeed = useSelector((state) => state.postnewsFeed);
+  const { loading, posts } = postnewsFeed;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const postCreate = useSelector((state) => state.postCreate);
+  const {success} = postCreate
+  const { results} = posts
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(fetchNewsFeed)
+    }
+  }, [ userInfo, dispatch, success]);
+  
   return (
     <>
-      <div className={classes.public_posts}>
-        {alldata.map((data) => {
+    {loading ? <loading/> : <div className={classes.public_posts}>
+        {results.map((data) => {
           return (
             <>
               <PublicPost data={data} />
@@ -30,6 +31,7 @@ export default function PublicPosts() {
           );
         })}
       </div>
-    </>
+    }
+      </>
   );
 }

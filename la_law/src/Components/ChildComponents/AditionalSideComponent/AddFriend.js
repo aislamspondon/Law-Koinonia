@@ -1,5 +1,5 @@
 import React from "react";
-import asraful from "../../../assets/images/fnds_photo/Asraful.jpg";
+import asraful from "../../../assets/images/fnds_photo/robin.jpg";
 import classes from "../../../Styles/ChildStyles/AditionalPageClildStyle/AddFriends.module.css";
 export default function AddFriend() {
   return (
@@ -11,10 +11,10 @@ export default function AddFriend() {
           </div>
           <div className={classes.add_profile_name_and_work}>
             <div className={classes.add_profile_name}>
-              <p>Asraful Islam Spondon</p>
+              <p>Darcy Robin</p>
             </div>
             <div className={classes.add_profile_current_work}>
-              <p>CEO at S2E Solution</p>
+              <p>CEO at Mirjapur Gold Lab</p>
             </div>
             <button className={classes.follow}>
               <i class="uil uil-plus"></i>

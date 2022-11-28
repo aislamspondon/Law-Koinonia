@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import cover from "../../../assets/images/cover/1627845013074.jfif";
-import profile_pic from "../../../assets/images/profile_pic/243801350_3298072810479798_5198757960072350324_n.jpg";
+import fetchUserDetails from '../../../redux/thunk/fetchUserProfile';
 import classes from "../../../Styles/ChildStyles/ProfileBodyStyle/ProfileBody.module.css";
 
 function ProfileBody() {
+  const dispatch = useDispatch();
+  const userProfile = useSelector((state) => state.userProfile);
+  const { user } = userProfile;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  console.log(user)
+
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(fetchUserDetails);
+    }
+  }, [dispatch, userInfo]);
   return (
     <div>
       <div
@@ -29,7 +42,7 @@ function ProfileBody() {
                 fontWeight: "600",
               }}
             >
-              Jahidul Islam
+              {user.full_name}
             </p>
             <p
               style={{
@@ -39,7 +52,7 @@ function ProfileBody() {
                 fontWeight: "400",
               }}
             >
-              Student at Ranada Prasad Saha University
+              Bar ID at {user.court}
             </p>
             <p
               style={{
@@ -111,7 +124,7 @@ function ProfileBody() {
           </div>
         </div>
         <div className={classes.profilepic}>
-          <img src={profile_pic} alt="Profile" />
+          <img src={`http://127.0.0.1:8000${user.profile_pic}`} alt={user.username} />
         </div>
       </div>
       <div

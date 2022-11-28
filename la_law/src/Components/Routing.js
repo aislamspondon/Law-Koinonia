@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "./Layout";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AddCase from "./ChildComponents/StoreComponents/AddCase";
 import CaseStudy from "./Pages/CaseStudy";
 import GlobalNews from "./Pages/GlobalNews";
 import Home from "./Pages/Home";
@@ -31,6 +32,15 @@ export default function Routing() {
             element={
               <Layout>
                 <Store />
+              </Layout>
+            }
+          />
+          <Route
+            exact
+            path="/store/addcase"
+            element={
+              <Layout>
+                <AddCase />
               </Layout>
             }
           />
