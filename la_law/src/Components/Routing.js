@@ -3,6 +3,9 @@ import Layout from "./Layout";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddCase from "./ChildComponents/StoreComponents/AddCase";
+import CaseFileUpload from "./ChildComponents/StoreComponents/CaseFileUpload";
+import CaseDetails from "./ChildComponents/StoreComponents/CaseTableComponents/CaseDetails";
+import CaseStoreDone from "./ChildComponents/StoreComponents/CaseTableComponents/CaseStoreDone";
 import CaseStudy from "./Pages/CaseStudy";
 import GlobalNews from "./Pages/GlobalNews";
 import Home from "./Pages/Home";
@@ -41,6 +44,33 @@ export default function Routing() {
             element={
               <Layout>
                 <AddCase />
+              </Layout>
+            }
+          />
+          <Route
+            exact
+            path="/store/addcase/save"
+            element={
+              <Layout>
+                <CaseStoreDone />
+              </Layout>
+            }
+          />
+          <Route
+            exact
+            path="/store/addcase/upload-casefile/:id"
+            element={
+              <Layout>
+                <CaseFileUpload />
+              </Layout>
+            }
+          />
+          <Route
+            exact
+            path="/store/case/:id"
+            element={
+              <Layout>
+                <CaseDetails />
               </Layout>
             }
           />

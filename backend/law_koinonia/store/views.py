@@ -60,7 +60,7 @@ def case_category_delete(request, category_id ,*args, **kwargs):
 # Case Division ======================
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def case_division_view(request, *args, **kwargs):
     qs = Case_Division.objects.all()
     serializer = CaseDivisionSerializer(qs, many=True)
@@ -107,7 +107,8 @@ def case_division_delete(request, division_id ,*args, **kwargs):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def case_create(request, *args, **kwargs):
-    serializer = CaseSerializer(data=request.POST)
+    data = request.data
+    serializer = CaseSerializer(data=data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(data=serializer.data, status=201)
@@ -153,13 +154,15 @@ def uploadCaseFile(request):
     data = request.data
     case_id = data['case_id']
     case = Case.objects.get(_id=case_id)
-    case.profile_pic = request.FILES.get('case_file')
+    case.case_docs = request.FILES.get('case_file')
+    print(request.FILES.get('case_file'), "This is workd")
     case.save()
     return Response('File upload Done')
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def case_details_view(request,case_id ,*args, **kwargs):
+    print(request.user, case_id, "This is user")
     qs = Case.objects.filter(_id=case_id, user=request.user)
     if not qs.exists():
         return Response({"message": "You are not authorize or Case not exits"}, status=status.HTTP_404_NOT_FOUND)

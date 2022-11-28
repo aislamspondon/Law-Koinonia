@@ -9,7 +9,6 @@ const fetchCaseCreate = (
   case_details,
   complainant,
   defendant,
-  case_docs,
   division,
   case_respondent
 ) => {
@@ -25,19 +24,8 @@ const fetchCaseCreate = (
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-      console.log(
-        case_number,
-        case_title,
-        case_category,
-        case_details,
-        complainant,
-        defendant,
-        case_docs,
-        division,
-        case_respondent
-      );
       const { data } = await axios.post(
-        "http://127.0.0.1:8000/api/store/case-create",
+        `http://127.0.0.1:8000/api/store/case-create`,
         {
           case_number: case_number,
           case_title: case_title,
@@ -45,7 +33,6 @@ const fetchCaseCreate = (
           case_details: case_details,
           complainant: complainant,
           defendant: defendant,
-          case_docs: case_docs,
           division: division,
           case_respondent: case_respondent,
         },

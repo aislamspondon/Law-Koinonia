@@ -7,6 +7,8 @@ import Loading from "../../../Loading";
 import AddCaseButton from "./AddCaseButton";
 import CaseSearchBar from "./CaseSearchBar";
 
+import { Link } from "react-router-dom";
+
 export default function MyCaseBox() {
   const dispatch = useDispatch();
   const caseView = useSelector((state) => state.caseView);
@@ -15,10 +17,10 @@ export default function MyCaseBox() {
   const { userInfo } = userLogin;
   useEffect(() => {
     if (userInfo) {
-      dispatch(fetchCaseView)
+      dispatch(fetchCaseView);
     }
-  }, [ userInfo, dispatch]);
-  
+  }, [userInfo, dispatch]);
+
   return (
     <div className={classes.my_case_box}>
       <div
@@ -30,7 +32,9 @@ export default function MyCaseBox() {
         }}
       >
         <CaseSearchBar />
-        <AddCaseButton />
+        <Link to="/store/addcase">
+          <AddCaseButton />
+        </Link>
       </div>
       <div
         style={{
@@ -39,9 +43,7 @@ export default function MyCaseBox() {
           width: "100%",
         }}
       >
-        {loading ? <Loading/> : (
-          <CaseBox cases={cases} />
-        )}
+        {loading ? <Loading /> : <CaseBox cases={cases} />}
       </div>
     </div>
   );
