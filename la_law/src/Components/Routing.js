@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "./Layout";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import FilePostField from "./ChildComponents/FilePostField";
 import ProfileEdit from "./ChildComponents/ProfileComponent/ProfileEdit";
 import AddCase from "./ChildComponents/StoreComponents/AddCase";
 import CaseFileUpload from "./ChildComponents/StoreComponents/CaseFileUpload";
@@ -28,6 +29,15 @@ export default function Routing() {
             element={
               <Layout>
                 <Home />
+              </Layout>
+            }
+          />
+          <Route
+            exact
+            path="/upload-post"
+            element={
+              <Layout>
+                <FilePostField />
               </Layout>
             }
           />

@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "../../../Styles/ChildStyles/HomePageChildStyle/ShortProfile.module.css";
-export default function CaseTitle() {
+export default function CaseTitle({ data }) {
+  console.log(data);
+  const { case_category, case_number, case_respondent, division } = data;
   return (
     <>
       <div className={`${classes.recent_div} ${classes.recent_case}`}>
@@ -9,9 +11,7 @@ export default function CaseTitle() {
         </div>
         <div className={classes.case_title}>
           <p>
-            Civil Petition 860/2022 ((From the judgment and order dated 05th day
-            of April, 2018 passed by the High Court Division in Writ Petition
-            No.7545 of 2015))
+            {`${case_category} ${case_number} ((From the ${case_respondent} by the ${division}))`}
           </p>
         </div>
       </div>

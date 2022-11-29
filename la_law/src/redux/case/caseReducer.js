@@ -16,6 +16,9 @@ import {
   CASE_LIST_FAIL,
   CASE_LIST_REQUEST,
   CASE_LIST_SUCCESS,
+  CASE_PROFILE_VIEW_FAIL,
+  CASE_PROFILE_VIEW_REQUEST,
+  CASE_PROFILE_VIEW_SUCCESS,
   CASE_UPDATE_FAIL,
   CASE_UPDATE_REQUEST,
   CASE_UPDATE_SUCCESS,
@@ -178,6 +181,31 @@ export const caseDivisionReducer = (state = { cases_division: [] }, action) => {
         cases_division: action.payload,
       };
     case CASE_DIVISION_VIEW_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const caseProfileViewReducer = (state = { cases: [] }, action) => {
+  switch (action.type) {
+    case CASE_PROFILE_VIEW_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CASE_PROFILE_VIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        cases: action.payload,
+      };
+    case CASE_PROFILE_VIEW_FAIL:
       return {
         ...state,
         loading: false,

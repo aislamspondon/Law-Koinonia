@@ -1,10 +1,16 @@
 import { combineReducers } from "redux";
 import {
+  addFeedProfileDetailsReducer,
+  addFeedProfileFollowReducer,
+  addFeedProfileViewReducer,
+} from "./addFeedProfile/addFeedProfileReducer";
+import {
   caseCategoryViewReducer,
   caseCreateReducer,
   caseDeleteReducer,
   caseDetailsReducer,
   caseDivisionReducer,
+  caseProfileViewReducer,
   caseUpdateReducer,
   caseViewReducer,
 } from "./case/caseReducer";
@@ -28,6 +34,7 @@ const rootReducer = combineReducers({
   userProfile: userProfileReducer,
   userProfileUpdate: userProfileUpdateReducer,
   caseView: caseViewReducer,
+  caseProfileView: caseProfileViewReducer,
   caseCreate: caseCreateReducer,
   caseUpdate: caseUpdateReducer,
   caseDelete: caseDeleteReducer,
@@ -39,6 +46,9 @@ const rootReducer = combineReducers({
   postUpdate: postUpdateReducer,
   postDelete: postDeleteReducer,
   postnewsFeed: newsFeedViewReducer,
+  addFeedProfileList: addFeedProfileViewReducer,
+  addFeedProfileDetails: addFeedProfileDetailsReducer,
+  addFeedProfileFollow: addFeedProfileFollowReducer,
 });
 
 export default rootReducer;

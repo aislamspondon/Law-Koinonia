@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import fetchUserDetails from "../../../redux/thunk/fetchUserProfile";
 import classes from "../../../Styles/ChildStyles/HomePageChildStyle/HomePostMain.module.css";
 
@@ -36,22 +37,28 @@ export default function HomePost() {
           </button>
         </div>
         <div className={classes.assets_field}>
-          <div className={`${classes.asset_field} ${classes.photo_field}`}>
+          <Link
+            to="/upload-post"
+            className={`${classes.asset_field} ${classes.photo_field}`}
+          >
             <div className={`${classes.asset_icon} ${classes.photo_icon}`}>
               <i class="bx bx-image"></i>
             </div>
             <div className={classes.asset_title}>
               <p>Photo</p>
             </div>
-          </div>
-          <div className={`${classes.asset_field} ${classes.video_field}`}>
+          </Link>
+          <Link
+            to="/upload-post"
+            className={`${classes.asset_field} ${classes.video_field}`}
+          >
             <div className={`${classes.asset_icon} ${classes.video_icon}`}>
               <i class="bx bxl-youtube"></i>
             </div>
             <div className={classes.asset_title}>
               <p>Video</p>
             </div>
-          </div>
+          </Link>
           <div className={`${classes.asset_field} ${classes.event_field}`}>
             <div className={`${classes.asset_icon} ${classes.event_icon}`}>
               <i class="bx bx-calendar"></i>

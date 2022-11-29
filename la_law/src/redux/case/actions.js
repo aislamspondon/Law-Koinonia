@@ -5,6 +5,7 @@ import {
   CASE_DETAILS_SUCCESS,
   CASE_DIVISION_VIEW_SUCCESS,
   CASE_LIST_SUCCESS,
+  CASE_PROFILE_VIEW_SUCCESS,
   CASE_UPDATE_SUCCESS,
 } from "./actionType";
 
@@ -52,6 +53,13 @@ export const caseCategoryView = (data) => {
 export const caseDivisionView = (data) => {
   return {
     type: CASE_DIVISION_VIEW_SUCCESS,
+    payload: data,
+  };
+};
+
+export const caseProfileView = (data) => {
+  return {
+    type: CASE_PROFILE_VIEW_SUCCESS,
     payload: data,
   };
 };

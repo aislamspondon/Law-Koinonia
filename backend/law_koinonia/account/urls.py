@@ -7,4 +7,5 @@ urlpatterns = [
     path('admin/all/profile', views.get_allprofile, name="all-profile"),
     path('update-profile', views.update_profile, name="update-profile"),
     path('<str:username>/follow', views.user_follow_view, name="user-follow"),
+    path('add_feed', views.user_add_feed, name="user-add-feed"),
 ]

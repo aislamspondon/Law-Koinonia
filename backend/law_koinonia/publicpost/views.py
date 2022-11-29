@@ -27,11 +27,25 @@ def intro(request):
 def post_create(request, *args, **kwargs):
     data = request.data
     serializer = PostSerializer(data=data, many=False)
-    print("This is POst From ", data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(author=request.user)
         return Response(data=serializer.data, status = 201)
     return Response({}, status=400)
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def post_create(request, *args, **kwargs):
+#     user = request.user
+#     data = request.data
+    
+#     file = request.FILES.get('post_file')
+#     print(file, data['content'], "This is file and data")
+#     post = Post.objects.create(
+#         author = user,
+#         content = data['content'],
+#         file = file,
+#     )
+#     serializer = PostSerializer(post, many=False)
+#     return Response(serializer.data, status = 201)
 
 
 @api_view(['GET'])
@@ -90,10 +104,12 @@ def post_detail_view(request, post_id, *args, **kwargs):
 @permission_classes([IsAuthenticated])
 def uploadFilePost(request):
     data = request.data
-    file_id = data['file_id']
-    post = Post.objects.get(id=file_id)
-    post.file = request.FILES.get('file')
-    post.save()
+    content = data['post']
+    post = Post.objects.create(
+    author = request.user,
+    content=content,
+    file = request.FILES.get('post_file')
+    )
     return Response('File is upload')
 
 

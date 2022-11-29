@@ -182,3 +182,9 @@ def case_delete(request,case_id ,*args, **kwargs):
     return Response({"message": "Case Removed"}, status=200)
 
 
+@api_view(['GET'])
+def getRecentCase(request):
+    case = Case.objects.filter(user=request.user).order_by('-createAt')[0:3]
+    serializer = CaseSerializer(case, many=True)
+    return Response(serializer.data)
+

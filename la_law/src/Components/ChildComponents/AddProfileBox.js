@@ -4,19 +4,19 @@ import AddFriend from "./AditionalSideComponent/AddFriend";
 function AddProfileBox() {
   return (
     <>
-      <div
+      <label
         style={{
-          width: "280px",
+          width: "27%",
           height: "150px",
           backgroundColor: "#F0F2F5",
           display: "flex",
           alignItems: "center",
           borderRadius: "12px",
-          margin: "10px",
+          margin: "10px 5px",
         }}
       >
         <AddFriend />
-      </div>
+      </label>
     </>
   );
 }

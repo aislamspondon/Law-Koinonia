@@ -4,6 +4,7 @@ from store import views
 urlpatterns = [
     path('', views.intro, name="Store"),
     path('case', views.case_list_view, name="case_view"),
+    path('recent-case/', views.getRecentCase, name="recent_case_view"),
     path('case-create', views.case_create, name="case_create"),
     path('case/<str:case_id>', views.case_details_view, name="case_details_view"),
     path('case/<str:case_id>/delete', views.case_delete, name="case_details_view"),

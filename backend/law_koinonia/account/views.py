@@ -79,10 +79,24 @@ def user_follow_view(request, username ,*args, **kwargs):
     else:
         profile.followers.add(current_user)
     current_follower_qs = profile.followers.all()
-    return Response({"followers": current_follower_qs.count()}, status=status.HTTP_400_BAD_REQUEST)
+    return Response({"following": current_follower_qs.count()}, status=status.HTTP_400_BAD_REQUEST)
     
 
+from django.db.models import Q
 
+
+@api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
+def user_add_feed(request, *args, **kwargs):
+    current_user = request.user
+    profile = Profile.objects.get(user=current_user)
+    already_follows = profile.user.following.values()
+    follows_username = [follow['username'] for follow in already_follows]
+    alluser = User.objects.all().filter(~Q(username__in = follows_username))
+    not_follow_username = [user for user in alluser]
+    not_follow_profile = Profile.objects.all().filter(user__in = not_follow_username)
+    serializer = ProfileSerializer(not_follow_profile, many=True)
+    return Response(serializer.data)
 
 
 

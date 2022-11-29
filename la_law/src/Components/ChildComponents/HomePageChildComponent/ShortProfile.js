@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cover from "../../../assets/images/cover/1627845013074.jfif";
+import fetchCaseProfileView from "../../../redux/thunk/fetchCaseProfileView";
 import fetchUserDetails from "../../../redux/thunk/fetchUserProfile";
 import classes from "../../../Styles/ChildStyles/HomePageChildStyle/ShortProfile.module.css";
 import CaseTitle from "./CaseTitle";
@@ -11,11 +12,14 @@ export default function ShortProfile() {
   const { user } = userProfile;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  const caseProfileView = useSelector((state) => state.caseProfileView);
+  const { cases } = caseProfileView;
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     if (userInfo) {
       dispatch(fetchUserDetails);
+      dispatch(fetchCaseProfileView);
     }
   }, [dispatch, userInfo]);
   return (
@@ -53,9 +57,9 @@ export default function ShortProfile() {
               className={`${classes.show_details_div} ${classes.recent_cases}`}
             >
               <div className={classes.show_details_div_title}>Recent Case</div>
-              <CaseTitle />
-              <CaseTitle />
-              <CaseTitle />
+              {cases.map((data) => {
+                return <CaseTitle data={data} key={data._id} />;
+              })}
             </div>
             <div className={`${classes.show_details_div} ${classes.forum}`}>
               <div className={classes.show_details_div_title}>Forums</div>
