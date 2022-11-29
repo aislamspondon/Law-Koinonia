@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "../../../Styles/Pages/ManageMyNetwork.module.css";
-import AddFriend from "../AditionalSideComponent/AddFriend";
+import AddProfileBox from "../AddProfileBox";
 function PendingInvitation() {
   return (
     <div>
@@ -60,41 +60,20 @@ function PendingInvitation() {
           </p>
           <button className={classes.button}>See all</button>
         </div>
-        <div
-          style={{
-            width: "900px",
-            position: "relative",
-            overflow: "hidden",
-            border: "1px solid black",
-          }}
-        >
-          {/* <AddProfileBox /> */}
-          <span
-            style={{
-              width: "27%",
-              height: "150px",
-              backgroundColor: "#F0F2F5",
-              display: "flex",
-              alignItems: "center",
-              borderRadius: "12px",
-              margin: "10px 5px",
-            }}
-          >
-            <AddFriend />
-          </span>
-          <span
-            style={{
-              width: "27%",
-              height: "150px",
-              backgroundColor: "#F0F2F5",
-              display: "flex",
-              alignItems: "center",
-              borderRadius: "12px",
-              margin: "10px 5px",
-            }}
-          >
-            <AddFriend />
-          </span>
+        <div style={{ display: "flex", margin: "15px" }}>
+          <AddProfileBox />
+          <AddProfileBox />
+          <AddProfileBox />
+        </div>
+        <div style={{ display: "flex", margin: "15px" }}>
+          <AddProfileBox />
+          <AddProfileBox />
+          <AddProfileBox />
+        </div>
+        <div style={{ display: "flex", margin: "15px" }}>
+          <AddProfileBox />
+          <AddProfileBox />
+          <AddProfileBox />
         </div>
       </div>
     </div>

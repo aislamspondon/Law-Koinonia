@@ -16,7 +16,7 @@ export default function AddFriend() {
             <div className={classes.add_profile_current_work}>
               <p>CEO at Mirjapur Gold Lab</p>
             </div>
-            <button className={classes.follow}>
+            <button>
               <i class="uil uil-plus"></i>
               <p>Follow</p>
             </button>
