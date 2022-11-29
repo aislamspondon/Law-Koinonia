@@ -24,6 +24,8 @@ class Profile(models.Model):
     dob = models.DateField(blank=True, null=True)
     designation = models.CharField(max_length=50, blank=True)
     court = models.CharField(max_length=250, blank=True)
+    present_address = models.CharField(max_length=250, blank=True)
+    permanent_address = models.CharField(max_length=250, blank=True)
     barId = models.CharField(max_length=250, blank=True)
     website = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
@@ -37,10 +39,10 @@ class Profile(models.Model):
 def create_profile(sender, instance, created, **kwargs):
     if instance.practice_court == True:
         if created:
-            Profile.objects.create(user=instance , full_name=f"{instance.first_name} {instance.last_name}", court=instance.current_status, barId="Waiting For Bar Exam", username = instance.username, email = instance.email, phone_number = instance.phone_number)
+            Profile.objects.create(user=instance , full_name=f"{instance.first_name} {instance.last_name}", court=instance.current_status, barId="Waiting For Bar Exam", username = instance.username, email = instance.email, phone_number = instance.phone_number, designation= "Practice Lawyer")
     else:
         if created:
-            Profile.objects.create(user=instance , full_name=f"{instance.first_name} {instance.last_name}", barId=instance.current_status,court = "Court will be added Soon", username = instance.username, email = instance.email, phone_number = instance.phone_number)
+            Profile.objects.create(user=instance , full_name=f"{instance.first_name} {instance.last_name}", barId=instance.current_status,court = "Court will be added Soon", username = instance.username, email = instance.email, phone_number = instance.phone_number, designation="Lawyer")
 
 @receiver(post_save, sender=User)
 def save_profile(sender, instance, **kwargs):

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import classes from "../../../Styles/ChildStyles/ProfileBodyStyle/ProfileAditional.module.css";
 import AddFriend from "../AditionalSideComponent/AddFriend";
 
@@ -23,7 +24,9 @@ function ProfileAditional() {
             alignItems: "center",
           }}
         >
-          <p className={classes.adition_item}>Edit Public Profile & Url</p>
+          <Link to="/myprofile/edit/">
+            <p className={classes.adition_item}>Edit Public Profile & Url</p>
+          </Link>
           <div
             style={{
               fontSize: "18px",

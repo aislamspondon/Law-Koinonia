@@ -2,3 +2,14 @@
   background-color: gray;
   color: white;
 }
+.addCaseButton {
+  border-radius: 12px;
+}
+
+.updateButton {
+  border-radius: 12px;
+}
+.updateButton:hover {
+  background-color: rgb(45, 167, 184);
+  color: white;
+}

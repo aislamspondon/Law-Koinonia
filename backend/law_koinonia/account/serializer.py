@@ -14,7 +14,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         # fields = '__all__'
-        fields = ['id', 'full_name', 'profile_pic', 'username','email','followers', 'following', 'followers_count','following_count', 'phone_number', 'description', 'dob', 'designation', 'court', 'barId', 'website', 'facebook']
+        fields = ['id', 'full_name', 'profile_pic', 'username','email','followers', 'following', 'followers_count','following_count', 'phone_number', 'description', 'dob', 'designation', 'court', 'present_address', 'permanent_address', 'barId', 'website', 'facebook']
     
     def get_followers_count(self, obj):
         return obj.followers.count()

@@ -3,6 +3,7 @@ import {
   USER_LOGOUT,
   USER_PROFILE_RESET,
   USER_PROFILE_SUCCESS,
+  USER_PROFILE_UPDATE_SUCCESS,
   USER_REGISTER_SUCCESS,
 } from "./actionType";
 
@@ -30,6 +31,13 @@ export const register = (data) => {
 export const userProfile = (data) => {
   return {
     type: USER_PROFILE_SUCCESS,
+    payload: data,
+  };
+};
+
+export const userProfileUpdate = (data) => {
+  return {
+    type: USER_PROFILE_UPDATE_SUCCESS,
     payload: data,
   };
 };

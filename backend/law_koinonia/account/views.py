@@ -34,6 +34,10 @@ def update_profile(request):
     profile.description = data['description']
     profile.dob = data['dob']
     profile.designation = data['designation']
+    profile.court = data['court']
+    profile.present_address = data['present_address']
+    profile.permanent_address = data['permanent_address']
+    profile.barId = data['barId']
     profile.website = data['website']
     profile.facebook = data['facebook']
     profile.save()
@@ -52,8 +56,7 @@ def get_allprofile(request):
 @permission_classes([IsAuthenticated])
 def uploadProfileImage(request):
     data = request.data
-    profile_id = data['profile_id']
-    profile = Profile.objects.get(id=profile_id)
+    profile = Profile.objects.get(user=request.user)
     profile.profile_pic = request.FILES.get('profile_image')
     profile.save()
     return Response('Profile pic upload')

@@ -172,7 +172,7 @@ def case_details_view(request,case_id ,*args, **kwargs):
 
 
 @api_view(['DELETE'])
-@permission_classes([IsAuthenticated, IsAdminUser])
+@permission_classes([IsAuthenticated])
 def case_delete(request,case_id ,*args, **kwargs):
     qs = Case.objects.filter(_id=case_id, user=request.user)
     if not qs.exists():

@@ -2,9 +2,11 @@ import React from "react";
 import Layout from "./Layout";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ProfileEdit from "./ChildComponents/ProfileComponent/ProfileEdit";
 import AddCase from "./ChildComponents/StoreComponents/AddCase";
 import CaseFileUpload from "./ChildComponents/StoreComponents/CaseFileUpload";
 import CaseDetails from "./ChildComponents/StoreComponents/CaseTableComponents/CaseDetails";
+import CaseEdit from "./ChildComponents/StoreComponents/CaseTableComponents/CaseEdit";
 import CaseStoreDone from "./ChildComponents/StoreComponents/CaseTableComponents/CaseStoreDone";
 import CaseStudy from "./Pages/CaseStudy";
 import GlobalNews from "./Pages/GlobalNews";
@@ -76,6 +78,15 @@ export default function Routing() {
           />
           <Route
             exact
+            path="/store/case/:id/edit"
+            element={
+              <Layout>
+                <CaseEdit />
+              </Layout>
+            }
+          />
+          <Route
+            exact
             path="/case_study"
             element={
               <Layout>
@@ -107,6 +118,15 @@ export default function Routing() {
             element={
               <Layout>
                 <Profile />
+              </Layout>
+            }
+          />
+          <Route
+            exact
+            path="/myprofile/edit/"
+            element={
+              <Layout>
+                <ProfileEdit />
               </Layout>
             }
           />

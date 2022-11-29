@@ -1,13 +1,30 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import fetchCaseCategory from "../../../redux/thunk/fetchCaseCategory";
-import fetchCaseCreate from "../../../redux/thunk/fetchCaseCreate";
-import fetchCaseDivision from "../../../redux/thunk/fetchCaseDivision";
-import classes from "../../../Styles/ChildStyles/StoreChild/caseButton.module.css";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import fetchCaseCategory from "../../../../redux/thunk/fetchCaseCategory";
+import fetchCaseDetails from "../../../../redux/thunk/fetchCaseDetails";
+import fetchCaseDivision from "../../../../redux/thunk/fetchCaseDivision";
+import fetchCaseUpdate from "../../../../redux/thunk/fetchCaseUpdate";
+import classes from "../../../../Styles/ChildStyles/StoreChild/caseButton.module.css";
+import Loading from "../../../Loading";
 
-export default function AddCase() {
+export default function CaseEdit() {
   const dispatch = useDispatch();
+  const { id } = useParams();
+  const caseDetails = useSelector((state) => state.caseDetails);
+  const {
+    case_number: number,
+    case_title: title,
+    case_category: category,
+    case_docs: docs,
+    case_details: details,
+    complainant: complainer,
+    defendant: defender,
+    division: division_clone,
+    case_respondent: respondent,
+  } = caseDetails.case;
+  console.log(docs, "This is docs");
   const respondents = [
     { id: 1, label: "FIR/PRIVATE_COMPLAINT", value: "fir/private_complaint" },
     {
@@ -28,14 +45,16 @@ export default function AddCase() {
   ];
 
   let navigate = useNavigate();
-  const [case_number, setCaseNumber] = useState("");
-  const [case_title, setCaseTitle] = useState("");
-  const [caseCategory, setCaseCategory] = useState("");
-  const [case_details, setCaseDetails] = useState("");
-  const [complainant, setComplainent] = useState("");
-  const [defendant, setDefendant] = useState("");
-  const [division, setDivision] = useState("");
-  const [case_respondent, setCaseRespondent] = useState("");
+  const [case_number, setCaseNumber] = useState(number);
+  const [case_title, setCaseTitle] = useState(title);
+  const [caseCategory, setCaseCategory] = useState(category);
+  const [case_details, setCaseDetails] = useState(details);
+  const [case_docs, setCaseDocs] = useState(docs);
+  const [complainant, setComplainent] = useState(complainer);
+  const [defendant, setDefendant] = useState(defender);
+  const [division, setDivision] = useState(division_clone);
+  const [case_respondent, setCaseRespondent] = useState(respondent);
+  const [uploading, setUploading] = useState(false);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -47,6 +66,7 @@ export default function AddCase() {
     if (userInfo) {
       dispatch(fetchCaseCategory);
       dispatch(fetchCaseDivision);
+      dispatch(fetchCaseDetails);
     } else {
       navigate("/");
     }
@@ -54,8 +74,14 @@ export default function AddCase() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    // dispatch(
+    //   fetchCaseCreate(
+
+    //   )
+    // );
     dispatch(
-      fetchCaseCreate(
+      fetchCaseUpdate(
+        id,
         case_number,
         case_title,
         caseCategory,
@@ -66,11 +92,50 @@ export default function AddCase() {
         case_respondent
       )
     );
-    navigate("/store/addcase/save");
+    navigate(`/store/case/${id}`);
+  };
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("case_file", file);
+    formData.append("case_id", id);
+    setUploading(true);
+    try {
+      const config = {
+        headers: {
+          "Content-type": "multipart/form-data",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+      const { data } = await axios.post(
+        "http://127.0.0.1:8000/api/store/casefile-upload/",
+        formData,
+        config
+      );
+      setCaseDocs(data);
+      setUploading(false);
+      navigate(`/store/case/${id}/edit`);
+    } catch (error) {
+      setUploading(false);
+    }
   };
   return (
     <div>
-      <h1 style={{ color: "black", padding: "50px 70px" }}>Store You Case</h1>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <h1 style={{ color: "black", padding: "50px 70px" }}>Store You Case</h1>
+        <Link to={`/store/case/${id}`}>
+          <i class="bx bx-revision" style={{ fontSize: "25px" }}>
+            Back
+          </i>
+        </Link>
+      </div>
+
       <div style={{ margin: "5px 40px" }}>
         <form
           action=""
@@ -159,6 +224,42 @@ export default function AddCase() {
               margin: "20px",
             }}
           />
+          <br />
+          <div
+            style={{
+              width: "40%",
+              margin: "12px auto",
+              height: "70px",
+              background: "white",
+            }}
+          >
+            {uploading && <Loading />}
+            <p
+              style={{ fontSize: "12px", padding: "5px 10px", color: "black" }}
+            >
+              {case_docs}
+            </p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginTop: "5px",
+              }}
+            >
+              <label
+                style={{ color: "gray", fontSize: "16px", padding: "0px 10px" }}
+              >
+                Uplate Your Case File
+              </label>
+              <input
+                type="file"
+                name="case_docs"
+                id="case_docs"
+                onChange={uploadFileHandler}
+              />
+            </div>
+          </div>
 
           <br />
           <input
@@ -268,15 +369,7 @@ export default function AddCase() {
             type="submit"
             onClick={submitHandler}
             style={{ border: "1px solid black", padding: "15px 40px" }}
-            className={classes.addCaseButton}
-            disabled={
-              !(
-                case_title.length > 0 &&
-                case_number.length > 0 &&
-                complainant.length > 0 &&
-                defendant.length > 0
-              )
-            }
+            className={classes.updateButton}
           >
             Add Case
           </button>

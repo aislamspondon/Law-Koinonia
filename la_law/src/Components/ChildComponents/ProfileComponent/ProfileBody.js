@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import cover from "../../../assets/images/cover/1627845013074.jfif";
-import fetchUserDetails from '../../../redux/thunk/fetchUserProfile';
+import fetchUserDetails from "../../../redux/thunk/fetchUserProfile";
 import classes from "../../../Styles/ChildStyles/ProfileBodyStyle/ProfileBody.module.css";
 
 function ProfileBody() {
@@ -10,7 +10,7 @@ function ProfileBody() {
   const { user } = userProfile;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  console.log(user)
+  console.log(user);
 
   useEffect(() => {
     if (userInfo) {
@@ -52,7 +52,7 @@ function ProfileBody() {
                 fontWeight: "400",
               }}
             >
-              Bar ID at {user.court}
+              {user.designation} at {user.court}
             </p>
             <p
               style={{
@@ -124,7 +124,10 @@ function ProfileBody() {
           </div>
         </div>
         <div className={classes.profilepic}>
-          <img src={`http://127.0.0.1:8000${user.profile_pic}`} alt={user.username} />
+          <img
+            src={`http://127.0.0.1:8000${user.profile_pic}`}
+            alt={user.username}
+          />
         </div>
       </div>
       <div

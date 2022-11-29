@@ -54,5 +54,5 @@ class Case(models.Model):
 
 
     def __str__(self):
-        return self.case_number
+        return str(self._id)
 

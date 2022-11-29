@@ -48,3 +48,30 @@
 .profilepic img {
   border-radius: 50%;
 }
+
+.profile_edit_action {
+  line-height: 19.9995px;
+  font-weight: 600;
+  text-decoration: none solid rgb(46, 137, 255);
+  font-family: "Segoe UI Historic" "Segoe UI" Helvetica Arial sans-serif;
+  /* color: "#263B56"; */
+  color: #263951;
+}
+.profile_edit_action:hover {
+  border-radius: 12px;
+  background-color: #263951;
+  color: white;
+  cursor: pointer;
+}
+
+.updateButton {
+  background-color: #263951;
+  color: white;
+  margin: 20px 30px;
+}
+
+.updateButton:hover {
+  background-color: chartreuse;
+  color: black;
+  font-weight: 700;
+}

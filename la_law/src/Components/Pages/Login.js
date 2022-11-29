@@ -51,7 +51,6 @@ function Login() {
     }
   };
   const [login, setLogin] = useState(true);
-  const [lawyerStudent, setLawyerStudent] = useState(true);
   return isLoading ? (
     <Loading />
   ) : (
@@ -140,7 +139,6 @@ function Login() {
                 value={last_name}
                 onChange={(e) => setLastname(e.target.value)}
               />
-
               <input
                 type="email"
                 placeholder="Enter Your Email"
@@ -184,15 +182,14 @@ function Login() {
                     margin: "5px 30px",
                   }}
                 >
-                  Are You Lawyer Student
+                  Are You Practise In Court
                 </p>
                 <label className={classes.radio}>
                   <input
                     type="radio"
-                    name="student_answer"
+                    name="practise_lawyer_answer"
                     value="yes"
                     onChange={(e) => {
-                      setLawyerStudent(true);
                       setPracticeCourt(true);
                     }}
                   />
@@ -209,10 +206,10 @@ function Login() {
                 <label className={classes.radio}>
                   <input
                     type="radio"
-                    name="student_answer"
+                    name="practise_lawyer_answer"
                     value="no"
                     onChange={(e) => {
-                      setLawyerStudent(false);
+                      setPracticeCourt(false);
                     }}
                   />
                   <p
@@ -226,63 +223,7 @@ function Login() {
                   </p>
                 </label>
               </div>
-
-              {lawyerStudent ? (
-                ""
-              ) : (
-                <div className={classes.control}>
-                  <p
-                    style={{
-                      fontSize: "20px",
-                      color: "black",
-                      margin: "5px 30px",
-                    }}
-                  >
-                    Are You Practise In Court
-                  </p>
-                  <label className={classes.radio}>
-                    <input
-                      type="radio"
-                      name="practise_lawyer_answer"
-                      value="yes"
-                      onChange={(e) => {
-                        setPracticeCourt(true);
-                      }}
-                    />
-                    <p
-                      style={{
-                        fontSize: "20px",
-                        color: "black",
-                        margin: "0 30px",
-                      }}
-                    >
-                      Yes
-                    </p>
-                  </label>
-                  <label className={classes.radio}>
-                    <input
-                      type="radio"
-                      name="practise_lawyer_answer"
-                      value="no"
-                      onChange={(e) => {
-                        setPracticeCourt(false);
-                      }}
-                    />
-                    <p
-                      style={{
-                        fontSize: "20px",
-                        color: "black",
-                        margin: "0 30px",
-                      }}
-                    >
-                      No
-                    </p>
-                  </label>
-                </div>
-              )}
-              {lawyerStudent ? (
-                ""
-              ) : practice_court ? (
+              {practice_court ? (
                 <input
                   type="text"
                   placeholder="Enter Your Practise Court Name"
