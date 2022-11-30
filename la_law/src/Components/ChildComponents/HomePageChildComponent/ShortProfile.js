@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cover from "../../../assets/images/cover/1627845013074.jfif";
+import fetchAddFeedProfile from "../../../redux/thunk/fetchAddFeedProfileList";
 import fetchCaseProfileView from "../../../redux/thunk/fetchCaseProfileView";
 import fetchUserDetails from "../../../redux/thunk/fetchUserProfile";
 import classes from "../../../Styles/ChildStyles/HomePageChildStyle/ShortProfile.module.css";
@@ -14,12 +15,14 @@ export default function ShortProfile() {
   const { userInfo } = userLogin;
   const caseProfileView = useSelector((state) => state.caseProfileView);
   const { cases } = caseProfileView;
+
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     if (userInfo) {
       dispatch(fetchUserDetails);
       dispatch(fetchCaseProfileView);
+      dispatch(fetchAddFeedProfile);
     }
   }, [dispatch, userInfo]);
   return (
@@ -57,9 +60,22 @@ export default function ShortProfile() {
               className={`${classes.show_details_div} ${classes.recent_cases}`}
             >
               <div className={classes.show_details_div_title}>Recent Case</div>
-              {cases.map((data) => {
-                return <CaseTitle data={data} key={data._id} />;
-              })}
+              {cases.length !== 0 ? (
+                cases.map((data) => {
+                  return <CaseTitle data={data} key={data._id} />;
+                })
+              ) : (
+                <p
+                  style={{
+                    fontSize: "12px",
+                    padding: "5px 10px",
+                    color: "red",
+                    fontWeight: "900",
+                  }}
+                >
+                  EMPTY CASES (No Case Found)
+                </p>
+              )}
             </div>
             <div className={`${classes.show_details_div} ${classes.forum}`}>
               <div className={classes.show_details_div_title}>Forums</div>

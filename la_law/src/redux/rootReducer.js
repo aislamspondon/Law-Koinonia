@@ -16,8 +16,10 @@ import {
 } from "./case/caseReducer";
 import {
   newsFeedViewReducer,
+  postCommentReducer,
   postCreateReducer,
   postDeleteReducer,
+  postLikeReducer,
   postUpdateReducer,
   postViewReducer,
 } from "./post/postReducer";
@@ -46,6 +48,8 @@ const rootReducer = combineReducers({
   postUpdate: postUpdateReducer,
   postDelete: postDeleteReducer,
   postnewsFeed: newsFeedViewReducer,
+  postLike: postLikeReducer,
+  postOpinion: postCommentReducer,
   addFeedProfileList: addFeedProfileViewReducer,
   addFeedProfileDetails: addFeedProfileDetailsReducer,
   addFeedProfileFollow: addFeedProfileFollowReducer,

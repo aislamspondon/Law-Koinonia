@@ -18,7 +18,7 @@ const fetchAddFeedProfile = async (dispatch, getState) => {
       },
     };
     const { data } = await axios.get(
-      `http://127.0.0.1:8000/api/store/case`,
+      `http://127.0.0.1:8000/api/account/add_feed`,
       config
     );
     dispatch(addProfileFeedList(data));

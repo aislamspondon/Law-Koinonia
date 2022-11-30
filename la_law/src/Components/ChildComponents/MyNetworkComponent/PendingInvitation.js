@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import fetchAddFeedProfile from "../../../redux/thunk/fetchAddFeedProfileList";
 import classes from "../../../Styles/Pages/ManageMyNetwork.module.css";
 import AddProfileBox from "../AddProfileBox";
 function PendingInvitation() {
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const addFeedProfileList = useSelector((state) => state.addFeedProfileList);
+  const { addUserProfiles } = addFeedProfileList;
+  const addFeedProfileFollow = useSelector(
+    (state) => state.addFeedProfileFollow
+  );
+  const { success } = addFeedProfileFollow;
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(fetchAddFeedProfile);
+    }
+  }, [dispatch, userInfo, success]);
   return (
     <div>
       <div
@@ -45,7 +61,7 @@ function PendingInvitation() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            width: "100%",
+            width: "900px",
           }}
         >
           <p
@@ -60,20 +76,15 @@ function PendingInvitation() {
           </p>
           <button className={classes.button}>See all</button>
         </div>
-        <div style={{ display: "flex", margin: "15px" }}>
-          <AddProfileBox />
-          <AddProfileBox />
-          <AddProfileBox />
-        </div>
-        <div style={{ display: "flex", margin: "15px" }}>
-          <AddProfileBox />
-          <AddProfileBox />
-          <AddProfileBox />
-        </div>
-        <div style={{ display: "flex", margin: "15px" }}>
-          <AddProfileBox />
-          <AddProfileBox />
-          <AddProfileBox />
+        <div style={{ margin: "15px" }}>
+          {addUserProfiles.map((addUserProfile) => {
+            return (
+              <AddProfileBox
+                addUserProfile={addUserProfile}
+                key={addUserProfile.id}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

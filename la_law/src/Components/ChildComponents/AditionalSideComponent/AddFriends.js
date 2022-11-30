@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import fetchAddFeedProfile from "../../../redux/thunk/fetchAddFeedProfileList";
 import classes from "../../../Styles/ChildStyles/AditionalPageClildStyle/AddFriends.module.css";
 import AddFriend from "./AddFriend";
 export default function AddFriends() {
+  const dispatch = useDispatch();
+  const addFeedProfileFollow = useSelector(
+    (state) => state.addFeedProfileFollow
+  );
+  const { success } = addFeedProfileFollow;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const addFeedProfileList = useSelector((state) => state.addFeedProfileList);
+  const { addUserProfiles } = addFeedProfileList;
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(fetchAddFeedProfile);
+    }
+  }, [dispatch, userInfo, success]);
   return (
     <>
       <div className={classes.add_feed}>
@@ -9,10 +25,14 @@ export default function AddFriends() {
           <h2>Add to your feed</h2>
           <i class="bx bxs-info-square"></i>
         </div>
-        <AddFriend />
-        <AddFriend />
-        <AddFriend />
-        <AddFriend />
+        {addUserProfiles.map((addUserProfile) => {
+          return (
+            <AddFriend
+              addUserProfile={addUserProfile}
+              key={addUserProfile.id}
+            />
+          );
+        })}
 
         {/* <div class="add_profile_template">
           <a href="#" class="add_profile_info">

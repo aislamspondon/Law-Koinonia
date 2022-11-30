@@ -1,4 +1,3 @@
-import React from "react";
 import classes from "../../../Styles/ChildStyles/AditionalPageClildStyle/AditionalPage.module.css";
 import AddFriends from "./AddFriends";
 import Advertise from "./Advertise";

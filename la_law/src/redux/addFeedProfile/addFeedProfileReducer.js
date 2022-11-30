@@ -10,7 +10,10 @@ import {
   ADD_FEED_PROFILE_LIST_SUCCESS,
 } from "./actionType";
 
-export const addFeedProfileViewReducer = (state = { profiles: [] }, action) => {
+export const addFeedProfileViewReducer = (
+  state = { addUserProfiles: [] },
+  action
+) => {
   switch (action.type) {
     case ADD_FEED_PROFILE_LIST_REQUEST:
       return {
@@ -21,7 +24,7 @@ export const addFeedProfileViewReducer = (state = { profiles: [] }, action) => {
       return {
         ...state,
         loading: false,
-        profiles: action.payload,
+        addUserProfiles: action.payload,
       };
     case ADD_FEED_PROFILE_LIST_FAIL:
       return {
@@ -65,6 +68,7 @@ export const addFeedProfileFollowReducer = (state = {}, action) => {
       return {
         loading: false,
         following: action.payload,
+        success: true,
       };
     case ADD_FEED_PROFILE_FOLLOW_FAIL:
       return {

@@ -61,7 +61,7 @@ def uploadProfileImage(request):
     profile.save()
     return Response('Profile pic upload')
 
-@api_view(['GET','POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def user_follow_view(request, username ,*args, **kwargs):
     current_user = request.user
@@ -79,7 +79,7 @@ def user_follow_view(request, username ,*args, **kwargs):
     else:
         profile.followers.add(current_user)
     current_follower_qs = profile.followers.all()
-    return Response({"following": current_follower_qs.count()}, status=status.HTTP_400_BAD_REQUEST)
+    return Response({"following": current_follower_qs.count()}, status=status.HTTP_200_OK)
     
 
 from django.db.models import Q
@@ -89,9 +89,14 @@ from django.db.models import Q
 @permission_classes([IsAuthenticated])
 def user_add_feed(request, *args, **kwargs):
     current_user = request.user
+    adminuser = User.objects.get(id=1)
     profile = Profile.objects.get(user=current_user)
     already_follows = profile.user.following.values()
     follows_username = [follow['username'] for follow in already_follows]
+    if current_user.username not in follows_username:
+        follows_username.append(current_user.username)
+        follows_username.append(adminuser.username)
+    
     alluser = User.objects.all().filter(~Q(username__in = follows_username))
     not_follow_username = [user for user in alluser]
     not_follow_profile = Profile.objects.all().filter(user__in = not_follow_username)

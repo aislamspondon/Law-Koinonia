@@ -143,7 +143,7 @@ def post_delete_view(request, post_id, *args, **kwargs):
     obj.delete()
     return Response({"message": "Post Removed"}, status=200)
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def post_like_toggle_view(request, post_id, *args, **kwargs):
     qs = Post.objects.filter(id = post_id)

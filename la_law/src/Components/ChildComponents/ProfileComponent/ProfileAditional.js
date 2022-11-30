@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import fetchAddFeedProfile from "../../../redux/thunk/fetchAddFeedProfileList";
 import classes from "../../../Styles/ChildStyles/ProfileBodyStyle/ProfileAditional.module.css";
 import AddFriend from "../AditionalSideComponent/AddFriend";
 
 function ProfileAditional() {
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const addFeedProfileFollow = useSelector(
+    (state) => state.addFeedProfileFollow
+  );
+  const { success } = addFeedProfileFollow;
+  const addFeedProfileList = useSelector((state) => state.addFeedProfileList);
+  const { addUserProfiles } = addFeedProfileList;
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(fetchAddFeedProfile);
+    }
+  }, [dispatch, userInfo, success]);
   return (
     <div>
       <div
@@ -89,13 +105,14 @@ function ProfileAditional() {
         </p>
 
         <div style={{ padding: "10px" }}>
-          <AddFriend />
-          <AddFriend />
-          <AddFriend />
-          <AddFriend />
-          <AddFriend />
-          <AddFriend />
-          <AddFriend />
+          {addUserProfiles.map((addUserProfile) => {
+            return (
+              <AddFriend
+                addUserProfile={addUserProfile}
+                key={addUserProfile.id}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

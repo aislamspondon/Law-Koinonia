@@ -49,7 +49,7 @@ class Post(models.Model):
     objects = PostManager()
 
     def __str__(self):
-        return str(self.author)
+        return str(self.id)
 
     class Meta:
         ordering = ['-id']

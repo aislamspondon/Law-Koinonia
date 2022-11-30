@@ -73,7 +73,7 @@
 button.follow {
   border: 1px solid black;
   display: flex;
-  width: 130px;
+  width: 120px;
   height: 30px;
   border-radius: 20px;
   align-items: center;
@@ -86,13 +86,14 @@ button.follow {
   font-size: 16px;
   color: rgba(0, 0, 0, 0.6);
   line-height: 20px;
+  text-align: center;
 }
 
 .follow p {
   color: rgba(0, 0, 0, 0.675);
   font-size: 16px;
   line-height: 20px;
-  padding: "5px 0px";
+  text-align: center;
 }
 
 button.follow:hover {

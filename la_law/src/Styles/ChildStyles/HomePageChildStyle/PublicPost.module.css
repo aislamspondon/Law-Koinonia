@@ -84,3 +84,17 @@
 .sender_file img {
   border-radius: 4px;
 }
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  padding: 12px 93px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #ffffff;
+}
+.actionButton:hover {
+  background-color: RGB(240, 240, 240);
+  font-weight: bold;
+}

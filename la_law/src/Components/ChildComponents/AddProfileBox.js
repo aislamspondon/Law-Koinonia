@@ -1,7 +1,7 @@
 import React from "react";
 import AddFriend from "./AditionalSideComponent/AddFriend";
 
-function AddProfileBox() {
+function AddProfileBox({ addUserProfile }) {
   return (
     <>
       <div
@@ -15,7 +15,7 @@ function AddProfileBox() {
           margin: "10px",
         }}
       >
-        <AddFriend />
+        <AddFriend addUserProfile={addUserProfile} />
       </div>
     </>
   );
