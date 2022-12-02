@@ -45,6 +45,7 @@ urlpatterns = [
     path('api/group/', include('lawyer_group.urls')),
     path('api/publicpost/', include('publicpost.urls')),
     path('api/store/', include('store.urls')),
+    path('api/case_study/', include('case_study.urls')),
     path('api/news/', include('news.urls')),
     path('api/chat/', include('chat.urls')),
     path('swagger<format>.json|.yaml/', schema_view.without_ui(cache_timeout=0), name='schema-json'),

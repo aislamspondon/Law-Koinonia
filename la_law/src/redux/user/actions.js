@@ -1,4 +1,5 @@
 import {
+  SINGLE_USER_PROFILE_SUCCESS,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
   USER_PROFILE_RESET,
@@ -38,6 +39,13 @@ export const userProfile = (data) => {
 export const userProfileUpdate = (data) => {
   return {
     type: USER_PROFILE_UPDATE_SUCCESS,
+    payload: data,
+  };
+};
+
+export const userSingleProfile = (data) => {
+  return {
+    type: SINGLE_USER_PROFILE_SUCCESS,
     payload: data,
   };
 };

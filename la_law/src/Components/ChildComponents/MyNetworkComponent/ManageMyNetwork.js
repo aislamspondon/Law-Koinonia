@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import fetchUserDetails from "../../../redux/thunk/fetchUserProfile";
 import classes from "../../../Styles/Pages/ManageMyNetwork.module.css";
 
 export default function ManageMyNetwork() {
+  const dispatch = useDispatch();
+  const userProfile = useSelector((state) => state.userProfile);
+  const { user } = userProfile;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(fetchUserDetails);
+    }
+  }, [dispatch, userInfo]);
   return (
     <div
       style={{
@@ -26,12 +38,16 @@ export default function ManageMyNetwork() {
           className={classes.link_item}
         >
           <div
-            style={{ display: "flex", fontSize: "20px", alignItems: "center" }}
+            style={{
+              display: "flex",
+              fontSize: "20px",
+              alignItems: "center",
+            }}
           >
             <i class="uil uil-users-alt"></i>
             <p style={{ marginLeft: "15px", fontSize: "16px" }}>Connections</p>
           </div>
-          <p>121</p>
+          <p>{user.connection_count}</p>
         </div>
         <div
           style={{
@@ -43,12 +59,16 @@ export default function ManageMyNetwork() {
           className={classes.link_item}
         >
           <div
-            style={{ display: "flex", fontSize: "20px", alignItems: "center" }}
+            style={{
+              display: "flex",
+              fontSize: "20px",
+              alignItems: "center",
+            }}
           >
             <i class="uil uil-book-alt"></i>
-            <p style={{ marginLeft: "15px", fontSize: "16px" }}>Contacts</p>
+            <p style={{ marginLeft: "15px", fontSize: "16px" }}>Followers</p>
           </div>
-          <p>202</p>
+          <p>{user.followers_count}</p>
         </div>
         <div
           style={{
@@ -60,14 +80,18 @@ export default function ManageMyNetwork() {
           className={classes.link_item}
         >
           <div
-            style={{ display: "flex", fontSize: "20px", alignItems: "center" }}
+            style={{
+              display: "flex",
+              fontSize: "20px",
+              alignItems: "center",
+            }}
           >
             <i class="uil uil-user-circle"></i>
             <p style={{ marginLeft: "15px", fontSize: "16px" }}>
               People I Follow
             </p>
           </div>
-          <p>30</p>
+          <p>{user.following_count}</p>
         </div>
         <div
           style={{
@@ -79,12 +103,16 @@ export default function ManageMyNetwork() {
           className={classes.link_item}
         >
           <div
-            style={{ display: "flex", fontSize: "20px", alignItems: "center" }}
+            style={{
+              display: "flex",
+              fontSize: "20px",
+              alignItems: "center",
+            }}
           >
             <i class="uil uil-users-alt"></i>
             <p style={{ marginLeft: "15px", fontSize: "16px" }}>Groups</p>
           </div>
-          <p>3</p>
+          <p>{user.group_count}</p>
         </div>
         <div
           style={{
@@ -96,7 +124,11 @@ export default function ManageMyNetwork() {
           className={classes.link_item}
         >
           <div
-            style={{ display: "flex", fontSize: "20px", alignItems: "center" }}
+            style={{
+              display: "flex",
+              fontSize: "20px",
+              alignItems: "center",
+            }}
           >
             <i class="uil uil-schedule"></i>
             <p style={{ marginLeft: "15px", fontSize: "16px" }}>Events</p>
@@ -113,7 +145,11 @@ export default function ManageMyNetwork() {
           className={classes.link_item}
         >
           <div
-            style={{ display: "flex", fontSize: "20px", alignItems: "center" }}
+            style={{
+              display: "flex",
+              fontSize: "20px",
+              alignItems: "center",
+            }}
           >
             <i class="uil uil-newspaper"></i>
             <p style={{ marginLeft: "15px", fontSize: "16px" }}>Newsletter</p>

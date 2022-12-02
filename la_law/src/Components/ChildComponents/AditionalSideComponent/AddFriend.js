@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import fetchAddFeedLike from "../../../redux/thunk/fetchAddFeedLike";
 import classes from "../../../Styles/ChildStyles/AditionalPageClildStyle/AddFriends.module.css";
 export default function AddFriend({ addUserProfile }) {
@@ -32,7 +32,12 @@ export default function AddFriend({ addUserProfile }) {
           </div>
           <div className={classes.add_profile_name_and_work}>
             <div className={classes.add_profile_name}>
-              <p>{addUserProfile.full_name}</p>
+              <Link
+                to={`/profile/${addUserProfile.username}`}
+                style={{ color: "#000000" }}
+              >
+                {addUserProfile.full_name}
+              </Link>
             </div>
             <div className={classes.add_profile_current_work}>
               <p>

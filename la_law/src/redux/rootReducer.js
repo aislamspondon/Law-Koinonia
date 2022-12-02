@@ -11,10 +11,12 @@ import {
   caseDetailsReducer,
   caseDivisionReducer,
   caseProfileViewReducer,
+  caseStudyViewReducer,
   caseUpdateReducer,
   caseViewReducer,
 } from "./case/caseReducer";
 import {
+  myNewsFeedViewReducer,
   newsFeedViewReducer,
   postCommentReducer,
   postCreateReducer,
@@ -22,8 +24,10 @@ import {
   postLikeReducer,
   postUpdateReducer,
   postViewReducer,
+  userNewsFeedViewReducer,
 } from "./post/postReducer";
 import {
+  singleUserProfileReducer,
   userLoginReducer,
   userProfileReducer,
   userProfileUpdateReducer,
@@ -34,6 +38,7 @@ const rootReducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userProfile: userProfileReducer,
+  singleUserProfile: singleUserProfileReducer,
   userProfileUpdate: userProfileUpdateReducer,
   caseView: caseViewReducer,
   caseProfileView: caseProfileViewReducer,
@@ -48,11 +53,14 @@ const rootReducer = combineReducers({
   postUpdate: postUpdateReducer,
   postDelete: postDeleteReducer,
   postnewsFeed: newsFeedViewReducer,
+  mypostnewsFeed: myNewsFeedViewReducer,
+  userpostnewsFeed: userNewsFeedViewReducer,
   postLike: postLikeReducer,
   postOpinion: postCommentReducer,
   addFeedProfileList: addFeedProfileViewReducer,
   addFeedProfileDetails: addFeedProfileDetailsReducer,
   addFeedProfileFollow: addFeedProfileFollowReducer,
+  caseStudyView: caseStudyViewReducer,
 });
 
 export default rootReducer;

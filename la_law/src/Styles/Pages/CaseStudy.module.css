@@ -1,6 +1,7 @@
 .case_study_result {
-  width: 90%;
-  background-color: transparent;
+  width: 70%;
+  background-color: #e2e2e2;
   height: auto;
-  float: right;
+  border-radius: 12px;
+  margin: 20px auto;
 }

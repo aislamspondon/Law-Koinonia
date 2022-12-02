@@ -21,6 +21,19 @@ def all_group(request, *args, **kwargs):
     serializer = LawyerGroupSerializer(obj, many=True)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def my_group(request, *args, **kwargs):
+    current_user = request.user
+    group_author = LawyerGroup.objects.all().filter(group_admin=current_user)
+    print(group_author)
+    group_member = LawyerGroup.objects.all().filter(group_member__user = current_user)
+    print(group_member)
+    group = [member for member in group_member]
+    serializer = LawyerGroupSerializer(group_member, many=True)
+    return Response(serializer.data)
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def lawyer_group_create(request, *args, **kwargs):

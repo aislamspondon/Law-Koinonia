@@ -1,6 +1,9 @@
 import axios from "axios";
-import { newfeedView } from "../post/actions";
-import { NEWS_FEED_VIEW_FAIL, NEWS_FEED_VIEW_REQUEST } from "../post/actionType";
+import { newsfeedView } from "../post/actions";
+import {
+  NEWS_FEED_VIEW_FAIL,
+  NEWS_FEED_VIEW_REQUEST,
+} from "../post/actionType";
 
 const fetchNewsFeed = async (dispatch, getState) => {
   try {
@@ -18,7 +21,7 @@ const fetchNewsFeed = async (dispatch, getState) => {
       `http://127.0.0.1:8000/api/publicpost/posts`,
       config
     );
-    dispatch(newfeedView(data));
+    dispatch(newsfeedView(data));
   } catch (error) {
     dispatch({
       type: NEWS_FEED_VIEW_FAIL,

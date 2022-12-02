@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.intro, name="post"),
     path('create', views.post_create, name="post"),
     path('posts', views.user_feed_view, name="posts"),
+    path('posts/<str:username>/', views.get_post_all_of_username, name="posts-userpos"),
     path('admin/allposts', views.post_list_view, name="post-list"),
     path('myposts', views.my_post_list_view, name="my-post-list"),
     path('posts-upload/', views.uploadFilePost, name='post-upload'),

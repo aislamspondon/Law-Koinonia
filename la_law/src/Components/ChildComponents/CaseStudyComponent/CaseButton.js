@@ -5,7 +5,11 @@ export default function CaseButton() {
     <>
       <button
         type="submit"
-        style={{ fontSize: "30px", backgroundColor: "transparent" }}
+        style={{
+          fontSize: "20px",
+          backgroundColor: "transparent",
+          marginRight: "15px",
+        }}
       >
         <i class="uil uil-search-alt"></i>
       </button>

@@ -16,6 +16,7 @@ class LawyerGroupMember(models.Model):
 
 class LawyerGroup(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
+    group_photo = models.ImageField(upload_to='client/images/group_pic/', blank=True, default='client/default/sampleGroup.jpg')
     group_admin = models.ForeignKey(User, on_delete=models.CASCADE, db_constraint=False)
     group_name= models.CharField(max_length=100, blank=False, null=False)
     group_desc = models.TextField(blank=True)

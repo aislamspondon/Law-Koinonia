@@ -32,7 +32,7 @@ export default function PublicPosts() {
           {results.map((data) => {
             return (
               <>
-                <PublicPost data={data} key={data.id} />
+                <PublicPost key={data.id} data={data} />;
                 <hr className={classes.hrclass} />
               </>
             );

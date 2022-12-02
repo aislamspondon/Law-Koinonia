@@ -92,6 +92,13 @@ def my_post_list_view(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def get_post_all_of_username(request, username ,*args, **kwargs):
+    post = Post.objects.all().filter(author__username=username)
+    serializer = PostSerializer(post, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def post_detail_view(request, post_id, *args, **kwargs):
     qs = Post.objects.filter(id=post_id)
     if not qs.exists():
@@ -156,7 +163,9 @@ def post_like_toggle_view(request, post_id, *args, **kwargs):
     else:
         obj.likes.add(request.user)
         return Response({"message": "Like Done"}, status=status.HTTP_200_OK)
-    
+
+
+
 
 
 @api_view(['POST'])

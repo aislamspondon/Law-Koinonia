@@ -1,7 +1,6 @@
 import React from "react";
 import classes from "../../../Styles/ChildStyles/HomePageChildStyle/ShortProfile.module.css";
 export default function CaseTitle({ data }) {
-  console.log(data);
   const { case_category, case_number, case_respondent, division } = data;
   return (
     <>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import docs from "../../../assets/images/image/file.jfif";
 import fetchPostLike from "../../../redux/thunk/fetchPostLike";
 import classes from "../../../Styles/ChildStyles/HomePageChildStyle/PublicPost.module.css";
@@ -7,11 +8,13 @@ import Opinion from "./Opinion";
 import OpinionPostBox from "./OpinionPostBox";
 export default function PublicPost({ data }) {
   const dispatch = useDispatch();
+  console.log(data);
   const {
     id: post_id,
     profile_pic,
     author,
     opinion,
+    username,
     author_id: authorId,
   } = data;
   const userLogin = useSelector((state) => state.userLogin);
@@ -97,7 +100,9 @@ export default function PublicPost({ data }) {
             </div>
             <div className={classes.sender_name_and_work}>
               <div className={classes.post_sender_name}>
-                <h5>{author}</h5>
+                <Link style={{ color: "#000000" }} to={`/profile/${username}`}>
+                  {author}
+                </Link>
               </div>
               <div className={classes.post_sender_current_work}>
                 <p>
@@ -264,6 +269,8 @@ export default function PublicPost({ data }) {
             : ""}
         </div>
       </div>
+      <hr />
+      <hr />
     </>
   );
 }

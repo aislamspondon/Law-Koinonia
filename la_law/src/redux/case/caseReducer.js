@@ -19,6 +19,9 @@ import {
   CASE_PROFILE_VIEW_FAIL,
   CASE_PROFILE_VIEW_REQUEST,
   CASE_PROFILE_VIEW_SUCCESS,
+  CASE_STUDY_VIEW_FAIL,
+  CASE_STUDY_VIEW_REQUEST,
+  CASE_STUDY_VIEW_SUCCESS,
   CASE_UPDATE_FAIL,
   CASE_UPDATE_REQUEST,
   CASE_UPDATE_SUCCESS,
@@ -206,6 +209,31 @@ export const caseProfileViewReducer = (state = { cases: [] }, action) => {
         cases: action.payload,
       };
     case CASE_PROFILE_VIEW_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const caseStudyViewReducer = (state = { cases: [] }, action) => {
+  switch (action.type) {
+    case CASE_STUDY_VIEW_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CASE_STUDY_VIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        cases: action.payload,
+      };
+    case CASE_STUDY_VIEW_FAIL:
       return {
         ...state,
         loading: false,

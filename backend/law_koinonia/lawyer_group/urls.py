@@ -3,6 +3,7 @@ from lawyer_group import views
 
 urlpatterns = [
     path('', views.all_group, name="lawyer-group"),
+    path('my-group', views.my_group, name="lawyer-group-my"),
     path('post-create/<str:group_id>', views.lawyer_group_post_create, name="lawyer-group-post-create"),
     path('update-post/<str:post_id>/group/<str:group_id>', views.lawyer_group_post_update, name="lawyer-group-post-update"),
     path('delete-post/<str:post_id>/group/<str:group_id>', views.lawyer_group_post_delete, name="lawyer-group-post-delete"),

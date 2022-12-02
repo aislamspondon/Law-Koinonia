@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import classes from "../../Styles/ChildStyles/ProfileNavbar.module.css";
 import ProfileBox from "./ProfileBox/ProfileBox";
 
-
 export default function ProfileNavbar(props) {
   const [toggle, setToggle] = useState(false);
   function toggleClick() {
@@ -22,7 +21,11 @@ export default function ProfileNavbar(props) {
               <i class="bx bxs-bell"></i>
             </a>
           </li>
-          <li className={classes.nav_item} onClick={toggleClick}>
+          <li
+            className={classes.nav_item}
+            onClick={toggleClick}
+            style={{ cursor: "pointer" }}
+          >
             {toggle ? (
               <div className={`${classes.nav_profile_details}`}>
                 <i

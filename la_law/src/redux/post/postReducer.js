@@ -1,4 +1,7 @@
 import {
+  MY_NEWS_FEED_VIEW_FAIL,
+  MY_NEWS_FEED_VIEW_REQUEST,
+  MY_NEWS_FEED_VIEW_SUCCESS,
   NEWS_FEED_VIEW_FAIL,
   NEWS_FEED_VIEW_REQUEST,
   NEWS_FEED_VIEW_SUCCESS,
@@ -20,6 +23,9 @@ import {
   POST_VIEW_FAIL,
   POST_VIEW_REQUEST,
   POST_VIEW_SUCCESS,
+  USER_NEWS_FEED_VIEW_FAIL,
+  USER_NEWS_FEED_VIEW_REQUEST,
+  USER_NEWS_FEED_VIEW_SUCCESS,
 } from "./actionType";
 
 export const postCreateReducer = (state = {}, action) => {
@@ -134,6 +140,57 @@ export const newsFeedViewReducer = (
         posts: action.payload,
       };
     case NEWS_FEED_VIEW_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const myNewsFeedViewReducer = (state = { posts: [] }, action) => {
+  switch (action.type) {
+    case MY_NEWS_FEED_VIEW_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case MY_NEWS_FEED_VIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        posts: action.payload,
+      };
+    case MY_NEWS_FEED_VIEW_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+export const userNewsFeedViewReducer = (state = { posts: [] }, action) => {
+  switch (action.type) {
+    case USER_NEWS_FEED_VIEW_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case USER_NEWS_FEED_VIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        posts: action.payload,
+      };
+    case USER_NEWS_FEED_VIEW_FAIL:
       return {
         ...state,
         loading: false,

@@ -1,4 +1,5 @@
 import {
+  MY_NEWS_FEED_VIEW_SUCCESS,
   NEWS_FEED_VIEW_SUCCESS,
   POST_COMMENT_SUCCESS,
   POST_CREATE_SUCCESS,
@@ -6,6 +7,7 @@ import {
   POST_LIKE_SUCCESS,
   POST_UPDATE_SUCCESS,
   POST_VIEW_SUCCESS,
+  USER_NEWS_FEED_VIEW_SUCCESS,
 } from "./actionType";
 
 export const postCreate = (data) => {
@@ -35,9 +37,22 @@ export const postDelete = (data) => {
   };
 };
 
-export const newfeedView = (data) => {
+export const newsfeedView = (data) => {
   return {
     type: NEWS_FEED_VIEW_SUCCESS,
+    payload: data,
+  };
+};
+
+export const myNewsfeedView = (data) => {
+  return {
+    type: MY_NEWS_FEED_VIEW_SUCCESS,
+    payload: data,
+  };
+};
+export const userNewsfeedView = (data) => {
+  return {
+    type: USER_NEWS_FEED_VIEW_SUCCESS,
     payload: data,
   };
 };

@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import fetchCaseStudyView from "../../redux/thunk/fetchCaseStudyViewReducer";
 import classes from "../../Styles/Pages/CaseStudy.module.css";
-import CaseButton from "../ChildComponents/CaseStudyComponent/CaseButton";
 import CaseStudyIcons from "../ChildComponents/CaseStudyComponent/CaseStudyIcons";
-import CaseStudySearchbox from "../ChildComponents/CaseStudyComponent/CaseStudySearchbox";
 import CaseStudySearchResult from "../ChildComponents/CaseStudyComponent/CaseStudySearchResult";
 export default function CaseStudy() {
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const caseStudyView = useSelector((state) => state.caseStudyView);
+  const { cases } = caseStudyView;
+  const [query, setQuery] = useState("");
+  console.log();
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(fetchCaseStudyView);
+    }
+  }, [dispatch, userInfo]);
   return (
     <>
       <div>
@@ -16,15 +28,37 @@ export default function CaseStudy() {
             margin: "10px",
           }}
         >
-          <CaseStudySearchbox />
-          <CaseButton />
+          <div>
+            <input
+              type="text"
+              placeholder="Search Your Case"
+              style={{
+                width: "60vw",
+                height: "50px",
+                paddingLeft: "50px",
+                margin: "20px",
+                borderRadius: "12px",
+                outline: "none",
+                border: "1px solid #9DA3BD",
+              }}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+          {/* <CaseButton /> */}
         </div>
         <CaseStudyIcons />
 
         <hr />
       </div>
       <div className={classes.case_study_result}>
-        <CaseStudySearchResult></CaseStudySearchResult>
+        {query.length > 2 &&
+          cases
+            .filter((user) =>
+              user.title.toLowerCase().includes(query.toLowerCase())
+            )
+            .map((user) => {
+              return <CaseStudySearchResult key={user.id} user={user} />;
+            })}
       </div>
     </>
   );

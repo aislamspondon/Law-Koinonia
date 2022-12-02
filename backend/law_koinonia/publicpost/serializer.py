@@ -49,6 +49,7 @@ class PostSerializer(serializers.ModelSerializer):
     likers = serializers.SerializerMethodField(read_only=True)
     opinion_count = serializers.SerializerMethodField(read_only=True)
     author = serializers.SerializerMethodField(read_only=True)
+    username = serializers.SerializerMethodField(read_only=True)
     author_id = serializers.SerializerMethodField(read_only=True)
     profile_pic = serializers.SerializerMethodField(read_only=True)
     designation = serializers.SerializerMethodField(read_only=True)
@@ -57,7 +58,7 @@ class PostSerializer(serializers.ModelSerializer):
     opinion = PostOpinionSerializer(many=True, read_only=True)
     class Meta:
         model = Post
-        fields = ['id', 'author','author_id', 'profile_pic', 'designation', 'court', 'content', 'file','likes', 'likers' ,'opinion', 'opinion_count' ]
+        fields = ['id', 'author','username','author_id', 'profile_pic', 'designation', 'court', 'content', 'file','likes', 'likers' ,'opinion', 'opinion_count' ]
     
     def get_likes(self, obj):
         return obj.likes.count()
@@ -72,6 +73,10 @@ class PostSerializer(serializers.ModelSerializer):
         serializer = UserSerializer(author, many=False)
         author_name = f"{serializer.data['first_name']} {serializer.data['last_name']}"
         return author_name
+    
+    def get_username(self, obj):
+        author = obj.author
+        return author.username
 
     def get_profile_pic(self, obj):
         author = obj.author

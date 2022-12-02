@@ -79,9 +79,9 @@ export default function ShortProfile() {
             </div>
             <div className={`${classes.show_details_div} ${classes.forum}`}>
               <div className={classes.show_details_div_title}>Forums</div>
-              <Forums forum="Bandar Law Forum" />
-              <Forums forum="Narayanganj Law Forum" />
-              <Forums forum="3 Start Law Forum" />
+              {user.groups.map((group) => {
+                return <Forums key={group._id} forum={group.group_name} />;
+              })}
             </div>
           </div>
         ) : null}

@@ -5,6 +5,11 @@
   background: #ffffff;
   border: 1px dotted rgb(104, 95, 95);
 }
+.hrclass {
+  height: 10px;
+  background-color: #f3f2ef;
+  border: none;
+}
 .input_post_field {
   position: relative;
   margin: 5px 0;
@@ -71,11 +76,6 @@
   color: #b4340d9c;
 }
 
-.hrclass {
-  height: 10px;
-  background-color: #f3f2ef;
-  border: none;
-}
 .posting_page {
   position: fixed;
   top: 0;

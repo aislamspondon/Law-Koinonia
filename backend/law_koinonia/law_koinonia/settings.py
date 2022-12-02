@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'publicpost.apps.PublicpostConfig',
     'store.apps.StoreConfig',
     'news.apps.NewsConfig',
+    'case_study.apps.CaseStudyConfig',
     'chat.apps.ChatConfig',
 
     # Third Party Apps

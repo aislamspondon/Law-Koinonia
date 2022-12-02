@@ -75,3 +75,44 @@
   color: black;
   font-weight: 700;
 }
+
+.actionButton {
+  padding: 16px;
+  color: RGBA(0, 0, 0, 0.6);
+  font-size: 16px;
+  line-height: 19.9995px;
+  font-weight: 600;
+  font-family: "Segoe UI Historic" "Segoe UI" Helvetica Arial sans-serif;
+  text-decoration: none solid rgb(46, 137, 255);
+  margin: 5px 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.actionButton:hover {
+  background-color: #3a3b3c;
+  color: white;
+  border-radius: 12px;
+}
+
+.actionButton.active {
+  color: #2e89ff;
+  border-bottom: 2px solid #2e89ff;
+}
+
+.actionButton.active:hover {
+  background-color: #ffffff;
+  border-radius: 0px;
+}
+
+.followerButton {
+  padding: 10px 30px;
+  font-weight: bolder;
+  font-size: 16px;
+  border-radius: 12px;
+}
+
+.followerButton:hover {
+  background-color: #0a66c2;
+  color: #e2f0fe;
+}

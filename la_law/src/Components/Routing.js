@@ -3,6 +3,7 @@ import Layout from "./Layout";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import FilePostField from "./ChildComponents/FilePostField";
+import AccountProfile from "./ChildComponents/ProfileComponent/AccountProfileView.js/AccountProfile";
 import ProfileEdit from "./ChildComponents/ProfileComponent/ProfileEdit";
 import AddCase from "./ChildComponents/StoreComponents/AddCase";
 import CaseFileUpload from "./ChildComponents/StoreComponents/CaseFileUpload";
@@ -128,6 +129,15 @@ export default function Routing() {
             element={
               <Layout>
                 <Profile />
+              </Layout>
+            }
+          />
+          <Route
+            exact
+            path="/profile/:username/"
+            element={
+              <Layout>
+                <AccountProfile />
               </Layout>
             }
           />

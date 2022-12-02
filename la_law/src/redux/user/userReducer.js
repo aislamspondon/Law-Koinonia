@@ -1,4 +1,7 @@
 import {
+  SINGLE_USER_PROFILE_FAIL,
+  SINGLE_USER_PROFILE_REQUEST,
+  SINGLE_USER_PROFILE_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -104,6 +107,29 @@ export const userProfileUpdateReducer = (state = { user: {} }, action) => {
         user: action.payload,
       };
     case USER_PROFILE_UPDATE_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const singleUserProfileReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case SINGLE_USER_PROFILE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SINGLE_USER_PROFILE_SUCCESS:
+      return {
+        loading: false,
+        user: action.payload,
+      };
+    case SINGLE_USER_PROFILE_FAIL:
       return {
         loading: false,
         error: action.payload,

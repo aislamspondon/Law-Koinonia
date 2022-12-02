@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Opinion({ data, authorId }) {
   const [author, setAuthor] = useState(false);
@@ -56,7 +57,8 @@ export default function Opinion({ data, authorId }) {
             alignItems: "center",
           }}
         >
-          <p
+          <Link
+            to={`/profile/${opinioner}`}
             style={{
               color: "black",
               fontSize: "13px",
@@ -67,7 +69,7 @@ export default function Opinion({ data, authorId }) {
             }}
           >
             {opinioner_name}
-          </p>
+          </Link>
           {author && (
             <p
               style={{
