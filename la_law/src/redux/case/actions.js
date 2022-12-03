@@ -6,6 +6,7 @@ import {
   CASE_DIVISION_VIEW_SUCCESS,
   CASE_LIST_SUCCESS,
   CASE_PROFILE_VIEW_SUCCESS,
+  CASE_STUDY_VIEW_DETAILS_SUCCESS,
   CASE_STUDY_VIEW_SUCCESS,
   CASE_UPDATE_SUCCESS,
 } from "./actionType";
@@ -68,6 +69,13 @@ export const caseProfileView = (data) => {
 export const caseStudy = (data) => {
   return {
     type: CASE_STUDY_VIEW_SUCCESS,
+    payload: data,
+  };
+};
+
+export const caseStudyDetails = (data) => {
+  return {
+    type: CASE_STUDY_VIEW_DETAILS_SUCCESS,
     payload: data,
   };
 };

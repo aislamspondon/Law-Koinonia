@@ -1,25 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import fetchNewsView from "../../../redux/thunk/fetchNewsView";
 import classes from "../../../Styles/ChildStyles/GlobalNewsStyle/NewsBody.module.css";
 import NewsDiv from "./NewsDiv";
 
 export default function NewsBody() {
-  const allnews = [
-    {
-      id: 1,
-      title: "Integrated carbon risk assessments",
-      desc: "Our climate risk reports include analysis of an extensive set of carbon risk management and exposure metrics, sourced from sophisticated in house research and climate models, from stranded assets to clean technology investments and scenario analysis.",
-    },
-    {
-      id: 2,
-      title: "Integrated carbon risk assessments",
-      desc: "Our climate risk reports include analysis of an extensive set of carbon risk management and exposure metrics, sourced from sophisticated in house research and climate models, from stranded assets to clean technology investments and scenario analysis.",
-    },
-    {
-      id: 3,
-      title: "Integrated carbon risk assessments",
-      desc: "Our climate risk reports include analysis of an extensive set of carbon risk management and exposure metrics, sourced from sophisticated in house research and climate models, from stranded assets to clean technology investments and scenario analysis.",
-    },
-  ];
+  const dispatch = useDispatch();
+  const newsView = useSelector((state) => state.newsView);
+  const { news } = newsView;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(fetchNewsView);
+    }
+  }, [userInfo, dispatch]);
   return (
     <div className={classes.news_body} style={{ width: "75%" }}>
       <div style={{ display: "flex", padding: "20px", alignItems: "center" }}>
@@ -39,10 +35,10 @@ export default function NewsBody() {
         </button>
       </div>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
-        {allnews.map((news) => {
+        {news.results?.map((news) => {
           return (
             <>
-              <NewsDiv news={news} />
+              <NewsDiv news={news} key={news._id} />
             </>
           );
         })}

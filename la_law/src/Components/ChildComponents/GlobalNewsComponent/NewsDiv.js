@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import classes from "../../../Styles/ChildStyles/GlobalNewsStyle/NewsBody.module.css";
 
-function NewsDiv(props) {
+function NewsDiv({ news }) {
   return (
     <div
       className={classes.news}
       style={{
         width: "310px",
-        height: "350px",
+        height: "370px",
         borderStyle: "groove",
         borderRadius: "12px",
         overflow: "hidden",
@@ -22,13 +23,17 @@ function NewsDiv(props) {
           fontWeight: "bold",
         }}
       >
-        {props.news.title}
+        {news.title}
+      </div>
+      <div style={{ padding: "5px", color: "#000000", fontFamily: "Serif" }}>
+        <img
+          src={`http://127.0.0.1:8000/${news.image}`}
+          alt={news.title}
+          style={{ borderRadius: "12px" }}
+        />
       </div>
       <div style={{ padding: "15px", color: "#000000", fontFamily: "Serif" }}>
-        {props.news.desc}
-      </div>
-      <div style={{ padding: "15px", color: "#000000", fontFamily: "Serif" }}>
-        <a href="/">See More</a>
+        <Link to={`/global_news/${news._id}`}>See More</Link>
       </div>
     </div>
   );

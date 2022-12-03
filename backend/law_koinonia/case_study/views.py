@@ -32,3 +32,10 @@ def getCaseStudy(request):
     cases = CaseStudy.objects.all()
     serializer = CaseStudySerializer(cases, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def getCaseStudyDetails(request, id):
+    cases = CaseStudy.objects.get(id=id)
+    serializer = CaseStudySerializer(cases, many=False)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+

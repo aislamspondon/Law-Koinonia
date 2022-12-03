@@ -33,7 +33,7 @@ class NewsSerializer(serializers.ModelSerializer):
     opinion = NewsOpinionSerializer(many=True, read_only=True)
     class Meta:
         model = News
-        fields = ['_id','user','user_id','title', 'news_category' ,'likes', 'opinion', 'opinion_count', 'news_details', 'image', 'video', 'country']
+        fields = ['_id','user','user_id','title', 'news_category' ,'likes', 'opinion', 'opinion_count', 'news_details', 'image', 'video', 'country', 'created']
     
     def get__id(self, obj):
         return obj._id

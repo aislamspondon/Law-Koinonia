@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "./Layout";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import CaseStudyDetails from "./ChildComponents/CaseStudyComponent/CaseStudyDetails";
 import FilePostField from "./ChildComponents/FilePostField";
 import AccountProfile from "./ChildComponents/ProfileComponent/AccountProfileView.js/AccountProfile";
 import ProfileEdit from "./ChildComponents/ProfileComponent/ProfileEdit";
@@ -126,10 +127,19 @@ export default function Routing() {
           />
           <Route
             exact
-            path="/details/:id"
+            path="/global_news/:id"
             element={
               <Layout>
                 <NewsDetails />
+              </Layout>
+            }
+          />
+          <Route
+            exact
+            path="/case_study/:id"
+            element={
+              <Layout>
+                <CaseStudyDetails />
               </Layout>
             }
           />

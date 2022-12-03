@@ -1,0 +1,7 @@
+export const NEWS_LIST_REQUEST = "news/NEWS_LIST_REQUEST";
+export const NEWS_LIST_SUCCESS = "news/NEWS_LIST_SUCCESS";
+export const NEWS_LIST_FAIL = "news/NEWS_LIST_FAIL";
+
+export const NEWS_DETAILS_REQUEST = "news/NEWS_DETAILS_REQUEST";
+export const NEWS_DETAILS_SUCCESS = "news/NEWS_DETAILS_SUCCESS";
+export const NEWS_DETAILS_FAIL = "news/NEWS_DETAILS_FAIL";

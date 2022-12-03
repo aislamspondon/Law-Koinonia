@@ -11,10 +11,12 @@ import {
   caseDetailsReducer,
   caseDivisionReducer,
   caseProfileViewReducer,
+  caseStudyViewDetailsReducer,
   caseStudyViewReducer,
   caseUpdateReducer,
   caseViewReducer,
 } from "./case/caseReducer";
+import { newsDetailsReducer, newsViewReducer } from "./news/newsReducer";
 import {
   myNewsFeedViewReducer,
   newsFeedViewReducer,
@@ -61,6 +63,9 @@ const rootReducer = combineReducers({
   addFeedProfileDetails: addFeedProfileDetailsReducer,
   addFeedProfileFollow: addFeedProfileFollowReducer,
   caseStudyView: caseStudyViewReducer,
+  caseStudyViewDetails: caseStudyViewDetailsReducer,
+  newsView: newsViewReducer,
+  newsDetails: newsDetailsReducer,
 });
 
 export default rootReducer;
