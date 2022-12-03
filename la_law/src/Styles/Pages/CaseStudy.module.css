@@ -5,3 +5,20 @@
   border-radius: 12px;
   margin: 20px auto;
 }
+
+.case_study_result_item {
+  color: black;
+  width: 100%;
+  margin: 0px auto;
+  line-height: 35px;
+  padding: 10px 20px;
+  font-size: 18px;
+  display: flex;
+  cursor: pointer;
+}
+
+.case_study_result_item:hover {
+  background-color: #89c3dd;
+  border-radius: 12px;
+  color: #333030;
+}

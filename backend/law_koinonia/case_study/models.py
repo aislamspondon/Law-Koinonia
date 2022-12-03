@@ -13,7 +13,8 @@ class CaseStudy(models.Model):
         ('Files', 'files'),
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.TextField(blank=False, null=False )
+    title = models.CharField(max_length=2000,blank=False, null=False )
+    article = models.TextField(blank=True, null=True )
     tags = models.CharField(max_length=50, choices = TAGS, default=TAGS[0][0])
     files = models.FileField(upload_to="client/images/case_study", blank=True)
 

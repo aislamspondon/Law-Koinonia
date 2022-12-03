@@ -10,6 +10,7 @@ import CaseFileUpload from "./ChildComponents/StoreComponents/CaseFileUpload";
 import CaseDetails from "./ChildComponents/StoreComponents/CaseTableComponents/CaseDetails";
 import CaseEdit from "./ChildComponents/StoreComponents/CaseTableComponents/CaseEdit";
 import CaseStoreDone from "./ChildComponents/StoreComponents/CaseTableComponents/CaseStoreDone";
+import NewsDetails from "./NewsDetails";
 import CaseStudy from "./Pages/CaseStudy";
 import GlobalNews from "./Pages/GlobalNews";
 import Home from "./Pages/Home";
@@ -120,6 +121,15 @@ export default function Routing() {
             element={
               <Layout>
                 <GlobalNews />
+              </Layout>
+            }
+          />
+          <Route
+            exact
+            path="/details/:id"
+            element={
+              <Layout>
+                <NewsDetails />
               </Layout>
             }
           />
